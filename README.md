@@ -1,2 +1,2 @@
 # UGinCsharp
-Projekt zapiczeniowy P3 i PB
+Projekt zaliczeniowy P3 i PB
