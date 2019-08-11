@@ -10,6 +10,7 @@ namespace UGServ
         {
         static void Main(string[] args)
             {
+            //Logic for turn management/area generation etc
             }
         }
     }
