@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 
 namespace UGinCsharp
     {
-    public class Perk : Item, IEquipable
+    public class Module : Item, IEquipable<Creature>
         {
+        private Perk Upgrade;
         public void Equip(Creature a)
             {
-            a.Upgrades.Add(this);
+            a.Upgrades.Add((Upgrade,false));
             }
-        public static ushort Type { get; private set; }
+
+        public void Unequip(Creature a)
+            {
+            if(a.Upgrades.Contains((Upgrade, true)))
+                {
+                }
+            a.Upgrades.Remove((Upgrade, false));
+            }
         }
     }

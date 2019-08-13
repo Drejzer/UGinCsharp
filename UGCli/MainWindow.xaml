@@ -9,7 +9,9 @@
     <Grid>
         <DockPanel HorizontalAlignment="Left" Height="400" LastChildFill="False" Margin="616,10,0,0" VerticalAlignment="Top" Width="166"/>
         <DockPanel HorizontalAlignment="Left" Height="111" LastChildFill="False" Margin="10,299,0,0" VerticalAlignment="Top" Width="606"/>
-        <DockPanel HorizontalAlignment="Left" Height="289" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="606" RenderTransformOrigin="0.5,0.5"/>
+        <DockPanel HorizontalAlignment="Left" Height="289" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="606" RenderTransformOrigin="0.5,0.5">
+            <Image x:Name="Display" Height="289" VerticalAlignment="Top" Width="605"/>
+        </DockPanel>
 
     </Grid>
 </Window>

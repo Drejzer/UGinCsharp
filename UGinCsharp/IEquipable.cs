@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace UGinCsharp
     {
-    interface IEquipable
+    interface IEquipable<T>
         {
-        void Equip();
-        void Uneqiup();
+        void Equip(T a);
+        void Unequip(T a );
         }
     }
