@@ -33,12 +33,12 @@ namespace UGinCsharp
         /// movement speed in time per tile;<br/>
         /// negative means the creature is immobile;<br/>
         /// </summary>
-        private int BaseSpeed;
-        private int BaseRange;
-        private int BaseHP;
-        private int BaseEn;
-        private int BaseSt;
-        private int BaseDmg;
+        private int _baseSpeed;
+        private int _baseRange;
+        private int _baseHP;
+        private int _baseEn;
+        private int _baseSt;
+        private int _baseDmg;
         /// <summary>
         /// range of basic attacks 
         /// </summary>
@@ -50,10 +50,13 @@ namespace UGinCsharp
         public int Energy { get; private set; }
         public int MaxStamina { get; private set; }
         public int Stamina { get; private set; }
+        public short Facing { get; private set; }
+        public (int x, int y) Position { get; private set; }
         /// <summary>
         /// Holds upgrades to a Creature (special attacks, or other qualities) and information on its state
         /// </summary>
         public ICollection<(Perk P, bool active)> Upgrades;
+        public ICollection<(Item it, int Amount)> Inventory;
         /// <summary>
         /// Logic of the AI, and in case of players: control of a Creature
         /// </summary>
