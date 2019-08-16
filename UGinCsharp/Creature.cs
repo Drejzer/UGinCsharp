@@ -51,6 +51,12 @@ namespace UGinCsharp
         public int MaxStamina { get; private set; }
         public int Stamina { get; private set; }
         public short Facing { get; private set; }
+        public int SpdBonus { get; private set; }
+        public int EnBonus { get; private set; }
+        public int HpBonus { get; private set; }
+        public int DmgBonus{ get; private set; }
+        public int RngBonus { get; private set; }
+        public int StBonus { get; private set; }
         public (int x, int y) Position { get; private set; }
         /// <summary>
         /// Holds upgrades to a Creature (special attacks, or other qualities) and information on its state
@@ -61,5 +67,26 @@ namespace UGinCsharp
         /// Logic of the AI, and in case of players: control of a Creature
         /// </summary>
         public abstract void Action();
+        public bool ModHP(int a)
+            {
+            Health+=a;
+            return (Health>0);
+            }
+        public void ModEnergy(int a)
+            {
+            Energy+=a;
+            Energy=Math.Min(Energy,MaxEnergy);
+            Energy=Math.Max(Energy,0);
+            }
+        public void ModStamina(int a)
+            {
+            Stamina+=a;
+            Energy=Math.Min(Stamina,MaxStamina);
+            Energy=Math.Max(Stamina,0);
+            }
+        private void Recalc()
+            {
+            
+            }
         }
     }

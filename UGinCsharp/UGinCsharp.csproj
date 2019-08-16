@@ -69,10 +69,13 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICombatant.cs" />
     <Compile Include="IEquipable.cs" />
     <Compile Include="IMobile.cs" />
+    <Compile Include="Interfaces.cs" />
     <Compile Include="ITargetable.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="IUsable.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Perk.cs" />
     <Compile Include="Tile.cs" />
