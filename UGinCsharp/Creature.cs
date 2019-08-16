@@ -34,29 +34,20 @@ namespace UGinCsharp
         /// negative means the creature is immobile;<br/>
         /// </summary>
         private int _baseSpeed;
-        private int _baseRange;
-        private int _baseHP;
-        private int _baseEn;
-        private int _baseSt;
-        private int _baseDmg;
-        /// <summary>
-        /// range of basic attacks 
-        /// </summary>
-        public int Range { get; private set; }
-        public int Damage { get; private set; }
+        private int _baseHealth;
+        private int _baseEnergy;
+
+        public Weapon weapon;
         public int MaxHealth { get; private set; }
         public int Health { get; private set; }
         public int MaxEnergy { get; private set; }
         public int Energy { get; private set; }
-        public int MaxStamina { get; private set; }
-        public int Stamina { get; private set; }
         public short Facing { get; private set; }
-        public int SpdBonus { get; private set; }
-        public int EnBonus { get; private set; }
-        public int HpBonus { get; private set; }
-        public int DmgBonus{ get; private set; }
-        public int RngBonus { get; private set; }
-        public int StBonus { get; private set; }
+        public double SpeedBonus { get; private set; }
+        public double EnergyBonus { get; private set; }
+        public double HealthBonus { get; private set; }
+        public double DamageBonus{ get; private set; }
+        public double RangeBonus { get; private set; }
         public (int x, int y) Position { get; private set; }
         /// <summary>
         /// Holds upgrades to a Creature (special attacks, or other qualities) and information on its state
@@ -67,26 +58,30 @@ namespace UGinCsharp
         /// Logic of the AI, and in case of players: control of a Creature
         /// </summary>
         public abstract void Action();
-        public bool ModHP(int a)
+        public bool ModHealth(int a)
             {
             Health+=a;
             return (Health>0);
             }
+        /// <summary>
+        /// modifies the energy by specified value
+        /// </summary>
+        /// <param name="a"></param>
         public void ModEnergy(int a)
             {
             Energy+=a;
             Energy=Math.Min(Energy,MaxEnergy);
             Energy=Math.Max(Energy,0);
             }
-        public void ModStamina(int a)
-            {
-            Stamina+=a;
-            Energy=Math.Min(Stamina,MaxStamina);
-            Energy=Math.Max(Stamina,0);
-            }
+        /// <summary>
+        /// Calculates stats based on equipped items, and V/A/M/S
+        /// </summary>
         private void Recalc()
             {
-            
+            _baseHealth=20+5*Vitality;
+            _baseEnergy=5*Magic;
+            MaxHealth=(int)(((double)_baseHealth)*HealthBonus);
+            MaxEnergy=(int)(((double)_baseEnergy)*EnergyBonus);
             }
         }
     }
