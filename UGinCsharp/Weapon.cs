@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UGinCsharp
     {
-    public class Weapon: Item,IEquipable<Creature>
+    public class Weapon: Item,IEquipable
         {
         public void Equip(Creature a)
             {
@@ -14,7 +14,7 @@ namespace UGinCsharp
             }
         public void Unequip(Creature a)
             {
-            if(a.weapon is null)
+            if(a.weapon.Id==1)
                 {
                 return;
                 }

@@ -50,10 +50,9 @@ namespace UGinCsharp
         public double RangeBonus { get; private set; }
         public (int x, int y) Position { get; private set; }
         /// <summary>
-        /// Holds upgrades to a Creature (special attacks, or other qualities) and information on its state
+        /// Holds Special attacks or other such options
         /// </summary>
-        public ICollection<(Perk P, bool active)> Upgrades;
-        public ICollection<(Item it, int Amount)> Inventory;
+        public ((bool IsSloted, Item Upgrade) first, (bool IsSloted, Item Upgrade) second, (bool IsSloted, Item Upgrade) third, (bool IsSloted, Item Upgrade) fourth) Quickslots;
         /// <summary>
         /// Logic of the AI, and in case of players: control of a Creature
         /// </summary>

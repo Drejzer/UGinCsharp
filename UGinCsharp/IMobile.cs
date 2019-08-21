@@ -8,7 +8,7 @@ namespace UGinCsharp
     {
     interface IMobile
         {
-        public abstract int Move();
-        public abstract int Rotate();
+        int Move();
+        int Rotate();
         }
     }
