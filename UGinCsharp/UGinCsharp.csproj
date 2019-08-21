@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A3397E75-A8E7-481F-A28F-7AF6D3311F1F}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>UGinCsharp</RootNamespace>
     <AssemblyName>UGinCsharp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -35,6 +35,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -76,6 +79,7 @@
     <Compile Include="ITargetable.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="IUsable.cs" />
+    <Compile Include="Module.cs" />
     <Compile Include="Perk.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Encounter.cs" />

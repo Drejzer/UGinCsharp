@@ -45,14 +45,12 @@ namespace UGinCsharp
         public short Facing { get; private set; }
         public double SpeedBonus { get; private set; }
         public double EnergyBonus { get; private set; }
-        public double HealthBonus { get; private set; }
-        public double DamageBonus{ get; private set; }
-        public double RangeBonus { get; private set; }
+        public double HealthBonus { get; private set; } 
         public (int x, int y) Position { get; private set; }
         /// <summary>
         /// Holds Special attacks or other such options
         /// </summary>
-        public ((bool IsSloted, Item Upgrade) first, (bool IsSloted, Item Upgrade) second, (bool IsSloted, Item Upgrade) third, (bool IsSloted, Item Upgrade) fourth) Quickslots;
+        public ((bool IsSloted, Item Mod) first, (bool IsSloted, Item Mod) second, (bool IsSloted, Item Mod) third, (bool IsSloted, Item Mod) fourth, (bool IsSloted, Item Mod) fifth) Upgrades { get; set; }
         /// <summary>
         /// Logic of the AI, and in case of players: control of a Creature
         /// </summary>
@@ -77,7 +75,7 @@ namespace UGinCsharp
         /// </summary>
         private void Recalc()
             {
-            _baseHealth=20+5*Vitality;
+            _baseHealth=15+5*Vitality;
             _baseEnergy=5*Magic;
             MaxHealth=(int)(((double)_baseHealth)*HealthBonus);
             MaxEnergy=(int)(((double)_baseEnergy)*EnergyBonus);
