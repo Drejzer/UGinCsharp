@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace UGinCsharp
     {
-   public abstract class Item
+    [Serializable]
+    public abstract class Item
         {
         public int Id { get; private set; }
         public int Value { get; private set; }

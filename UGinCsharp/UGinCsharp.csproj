@@ -26,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\UGinCsharp.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -75,15 +76,16 @@
     <Compile Include="ICombatant.cs" />
     <Compile Include="IEquipable.cs" />
     <Compile Include="IMobile.cs" />
-    <Compile Include="Interfaces.cs" />
-    <Compile Include="ITargetable.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="IUsable.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Perk.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Room.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Encounter.cs" />
     <Compile Include="Creature.cs" />
+    <Compile Include="TileInstance.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>

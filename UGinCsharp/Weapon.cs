@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace UGinCsharp
     {
+    /// <summary>
+    /// Weapon used by a creature to atack other creatures.
+    /// </summary>
+    [Serializable]
     public class Weapon: Item,IEquipable
         {
+        /// <summary>
+        /// Damage dealt by a succesful attack, depends on the Strenght of a creature
+        /// </summary>
         public int Damage { get; private set; }
         private int _baseDamage;
         private double _scaling;
-        public static ICollection<Creature> Creatures;
         public void Equip(Creature a)
             {
             a.weapon=this;

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace UGinCsharp
     {
-    interface Interfaces
+    class Room
         {
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+        public ICollection<ICollection<TileInstance> > Tiles;
         }
     }
