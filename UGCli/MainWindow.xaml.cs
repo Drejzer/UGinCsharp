@@ -18,12 +18,15 @@ namespace UGCli
     {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
+    /// <br/> aka wth
     /// </summary>
     public partial class MainWindow:Window
         {
         public MainWindow()
             {
             InitializeComponent();
+
+            
             }
         }
     }

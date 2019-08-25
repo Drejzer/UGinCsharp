@@ -17,6 +17,7 @@ namespace UGinCsharp
         /// </summary>
         public int Damage { get; private set; }
         private int _baseDamage;
+        private int _range;
         private double _scaling;
         public void Equip(Creature a)
             {

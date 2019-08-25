@@ -15,7 +15,7 @@ namespace UGinCsharp
         /// <summary>
         /// Awaits interaction with UI
         /// </summary>
-        public override void Action()
+        public override int Action()
             {
             throw new NotImplementedException();
             }

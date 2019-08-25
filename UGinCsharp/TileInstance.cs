@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UGinCsharp
     {
-    class TileInstance
+    public class TileInstance
         {
         /// <summary>
         /// Posiotion of a Tile instance within a Room

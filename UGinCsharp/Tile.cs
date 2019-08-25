@@ -21,6 +21,9 @@ namespace UGinCsharp
         /// </summary>
         #warning "remember to add some placeholders"
         private string _imgSrc;
-        public virtual ICollection<TileInstance> TileInstances;
+        /// <summary>
+        /// Instances of a tile (DBstufff)
+        /// </summary>
+        public virtual ICollection<TileInstance> TileInstances { get; set; }
         }
     }

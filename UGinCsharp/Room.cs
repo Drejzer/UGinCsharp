@@ -6,10 +6,24 @@ using System.Threading.Tasks;
 
 namespace UGinCsharp
     {
-    class Room
+    /// <summary>
+    /// Holds the structure of a single level
+    /// </summary>
+    [Serializable]
+    public class Room
         {
+        /// <summary>
+        /// Describes the width of the room
+        /// </summary>
         public int Width { get; private set; }
+        /// <summary>
+        /// Describes the height of the room
+        /// </summary>
         public int Height { get; private set; }
-        public ICollection<ICollection<TileInstance> > Tiles;
+        /// <summary>
+        /// holds the layout of the room<br/>
+        /// </summary>
+        public ICollection<ICollection<TileInstance>> Tiles { get; private set; }
+
         }
     }
