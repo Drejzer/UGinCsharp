@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Linq;
+using System.Data.SQLite;
+using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace UGCli
     {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Deals with combat encounters
     /// </summary>
-    public partial class App:Application
+    class Encounter
         {
+
         }
     }

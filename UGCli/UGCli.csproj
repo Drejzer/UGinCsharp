@@ -55,6 +55,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Creature.cs" />
+    <Compile Include="Encounter.cs" />
+    <Compile Include="ICombatant.cs" />
+    <Compile Include="IEquipable.cs" />
+    <Compile Include="IMobile.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="IUsable.cs" />
+    <Compile Include="Module.cs" />
+    <Compile Include="Perk.cs" />
+    <Compile Include="Room.cs" />
+    <Compile Include="Tile.cs" />
+    <Compile Include="TileInstance.cs" />
+    <Compile Include="Weapon.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -69,6 +82,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -100,6 +114,11 @@
       <Project>{a3397e75-a8e7-481f-a28f-7af6d3311f1f}</Project>
       <Name>UGinCsharp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="PHtile1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

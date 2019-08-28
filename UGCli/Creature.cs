@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UGinCsharp
+namespace UGCli
     {
     /// <summary>
     /// Parent class for all enemies and player characters.
@@ -38,17 +38,8 @@ namespace UGinCsharp
         private int _baseHealth;
         private int _baseEnergy;
 
-        /// <summary>
-        /// Maximal amount of Health of a creature
-        /// </summary>
         public int MaxHealth { get; private set; }
-        /// <summary>
-        /// current health of a creature
-        /// </summary>
         public int Health { get; private set; }
-        /// <summary>
-        /// Maximal amount of energy of a creature 
-        /// </summary>
         public int MaxEnergy { get; private set; }
         public int Energy { get; private set; }
         public short Facing { get; private set; }
@@ -64,7 +55,6 @@ namespace UGinCsharp
         /// Holds Special attacks or other such options
         /// </summary>
         public ((bool IsSloted, Item Mod) first, (bool IsSloted, Item Mod) second, (bool IsSloted, Item Mod) third, (bool IsSloted, Item Mod) fourth, (bool IsSloted, Item Mod) fifth) Upgrades { get; set; }
-
         /// <summary>
         /// Logic of the AI, and in case of players: control of a Creature<br/>
         /// Returns time necesary to complete the action to complete the action
