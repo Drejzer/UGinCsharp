@@ -10,26 +10,29 @@ namespace UGCli
     [Serializable]
     public abstract class Creature
         {
+        public event EventHandler Halp;
+
         /// <summary>
-        /// Type, designates what kind of creature it is, for storage and database interaction
+        /// Designates power of a creature, Affects Health and Enegry
         /// </summary>
-        private static readonly int Type = 0;
+        public int Level { get; protected set; }
+        private int _xpToNextLvl;
         /// <summary>
         /// Influences Damage and carrying capcity (TODO)
         /// </summary>
-        public int Strenght { get; private set; }
+        public int Strenght { get; protected set; }
         /// <summary>
         /// To-hit, Defense, order of actions
         /// </summary>
-        public int Agility { get; private set; }
+        public int Agility { get; protected set; }
         /// <summary>
         /// Energy Reserves and Perk Capacity
         /// </summary>
-        public int Magic { get; private set; }
+        public int Magic { get; protected set; }
         /// <summary>
         /// Health and general surivability
         /// </summary>
-        public int Vitality { get; private set; }
+        public int Vitality { get; protected set; }
         /// <summary>
         /// movement speed in time per tile;<br/>
         /// negative means the creature is immobile;<br/>
@@ -38,18 +41,17 @@ namespace UGCli
         private int _baseHealth;
         private int _baseEnergy;
 
-        public int MaxHealth { get; private set; }
-        public int Health { get; private set; }
-        public int MaxEnergy { get; private set; }
-        public int Energy { get; private set; }
-        public short Facing { get; private set; }
-        public double SpeedBonus { get; private set; }
-        public double EnergyBonus { get; private set; }
-        public double HealthBonus { get; private set; } 
+        public int MaxHealth { get; protected set; }
+        public int Health { get; protected set; }
+        public int MaxEnergy { get; protected set; }
+        public int Energy { get; protected set; }
+        public double SpeedBonus { get; protected set; }
+        public int EnergyBonus { get; protected set; }
+        public int HealthBonus { get; protected set; } 
         /// <summary>
         /// The coordinates of a creature within a Room
         /// </summary>
-        public (int x, int y) Position { get; private set; }
+        public (int x, int y) Position { get; protected set; }
         public Weapon weapon;
         /// <summary>
         /// Holds Special attacks or other such options
@@ -87,10 +89,23 @@ namespace UGCli
         /// </summary>
         private void Recalc()
             {
-            _baseHealth=15+5*Vitality;
-            _baseEnergy=5*Magic;
-            MaxHealth=(int)(((double)_baseHealth)*HealthBonus);
-            MaxEnergy=(int)(((double)_baseEnergy)*EnergyBonus);
+            _baseHealth=(10+Vitality);
+            _baseEnergy=Magic;
+            MaxHealth=_baseHealth*Level+HealthBonus;
+            MaxEnergy=_baseEnergy*Level+EnergyBonus;
+            }
+        public virtual void LevelUp()
+            {
+            if(_xpToNextLvl>0)
+                {
+                return;
+                }
+            else
+                {
+                ++Level;
+                _xpToNextLvl+=100*Level*Level;
+                }
+
             }
         }
     }

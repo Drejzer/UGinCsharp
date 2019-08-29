@@ -23,7 +23,7 @@ namespace UGCli
         /// <summary>
         /// holds the layout of the room<br/>
         /// </summary>
-        public ICollection<ICollection<TileInstance>> Tiles { get; private set; }
+        public ICollection<ICollection<(bool IsOccupied,Creature Ocupant, TileInstance Tile)>> Map { get; set; }
 
         }
     }

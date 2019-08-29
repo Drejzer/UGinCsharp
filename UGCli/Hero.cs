@@ -10,7 +10,7 @@ namespace UGCli
     /// Player Character
     /// </summary>
     [Serializable]
-    class Hero:Creature,IMobile
+    public class Hero:Creature,IMobile
         {
         /// <summary>
         /// Awaits interaction with UI

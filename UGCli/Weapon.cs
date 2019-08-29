@@ -19,8 +19,16 @@ namespace UGCli
         private int _baseDamage;
         private int _range;
         private double _scaling;
+        private int _speed;
+        public Creature User;
+
+        public Weapon():base()
+            {
+
+            }
         public void Equip(Creature a)
             {
+            User=a;
             a.weapon=this;
             Damage=_baseDamage+(int)((double)(a.Strenght)*_scaling);
             }
@@ -32,8 +40,19 @@ namespace UGCli
                 }
             else if(a.weapon==this)
                 {
-                a.weapon=null;
                 }
+            }
+        public int GetAttackTime()
+            {
+            return _speed-(User.Strenght);
+            }
+        public int ResolveAttack()
+            {
+            throw new NotImplementedException();
+            }
+        public override void GeneratefromDB()
+            {
+#warning finish dat
             }
         }
     }

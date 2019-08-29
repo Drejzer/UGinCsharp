@@ -24,7 +24,6 @@ namespace UGCli
         public MainWindow()
             {
             InitializeComponent();
-
             
             }
         }

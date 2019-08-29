@@ -51,11 +51,5 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\UGinCsharp\UGinCsharp.csproj">
-      <Project>{a3397e75-a8e7-481f-a28f-7af6d3311f1f}</Project>
-      <Name>UGinCsharp</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

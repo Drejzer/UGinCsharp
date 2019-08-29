@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace UGCli
     {
-    class Module : Item, IEquipable
+    public class Module : Item, IEquipable
         {
-        private ICollection<Perk> Perks;
+
+        public ICollection<Perk> Perks { get; set; }
         public void Equip(Creature a)
             {
             foreach (Perk i in Perks)

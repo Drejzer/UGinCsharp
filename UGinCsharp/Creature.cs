@@ -13,7 +13,7 @@ namespace UGinCsharp
         /// <summary>
         /// Type, designates what kind of creature it is, for storage and database interaction
         /// </summary>
-        private static readonly int Type = 0;
+        private static  int Type = 0;
         /// <summary>
         /// Influences Damage and carrying capcity (TODO)
         /// </summary>
@@ -30,10 +30,6 @@ namespace UGinCsharp
         /// Health and general surivability
         /// </summary>
         public int Vitality { get; private set; }
-        /// <summary>
-        /// movement speed in time per tile;<br/>
-        /// negative means the creature is immobile;<br/>
-        /// </summary>
         private int _baseSpeed;
         private int _baseHealth;
         private int _baseEnergy;
@@ -50,20 +46,37 @@ namespace UGinCsharp
         /// Maximal amount of energy of a creature 
         /// </summary>
         public int MaxEnergy { get; private set; }
+        /// <summary>
+        /// current Energy of a creature
+        /// </summary>
         public int Energy { get; private set; }
-        public short Facing { get; private set; }
-        public double SpeedBonus { get; private set; }
-        public double EnergyBonus { get; private set; }
-        public double HealthBonus { get; private set; } 
+        public int Speed { get;  }
+        /// <summary>
+        /// Affects movement speed of the creature
+        /// </summary>
+        public double SpeedBonus { get; set; } = 1;
+        /// <summary>
+        /// The multiplier of the MaxEnery property
+        /// <br/> default value is 1
+        /// </summary>
+        public double EnergyBonus { get; set; } = 1;
+        /// <summary>
+        /// The multiplier of the MaxHelth property
+        /// <br/> default value is 1
+        /// </summary>
+        public double HealthBonus { get; set; } = 1; 
         /// <summary>
         /// The coordinates of a creature within a Room
         /// </summary>
-        public (int x, int y) Position { get; private set; }
+        public (int x, int y) Position { get; set; }
+        /// <summary>
+        /// Weapon used by a creature,
+        /// </summary>
         public Weapon weapon;
         /// <summary>
         /// Holds Special attacks or other such options
         /// </summary>
-        public ((bool IsSloted, Item Mod) first, (bool IsSloted, Item Mod) second, (bool IsSloted, Item Mod) third, (bool IsSloted, Item Mod) fourth, (bool IsSloted, Item Mod) fifth) Upgrades { get; set; }
+        public ((bool IsSloted, Module Mod) first, (bool IsSloted, Module Mod) second, (bool IsSloted, Module Mod) third, (bool IsSloted, Module Mod) fourth, (bool IsSloted, Module Mod) fifth) Upgrades { get; set; }
 
         /// <summary>
         /// Logic of the AI, and in case of players: control of a Creature<br/>
@@ -71,11 +84,10 @@ namespace UGinCsharp
         /// </summary>
         public abstract int Action();
         /// <summary>
-        /// Modifies Health by specified value
-        /// returns false if the Creature recieved lethal damage<br/>
+        /// Modifies Health by specified value <paramref name="a"/>
+        /// <br/> returns false if the Creature recieved lethal damage<br/>
         /// </summary>
         /// <param name="a"></param>
-        /// <returns></returns>
         public bool ModHealth(int a)
             {
             Health+=a;
@@ -83,12 +95,11 @@ namespace UGinCsharp
             return (Health>0);
             }
         /// <summary>
-        /// modifies the energy by specified value
+        /// Modifies the energy by <paramref name="value"/>
         /// </summary>
-        /// <param name="a"></param>
-        public void ModEnergy(int a)
+        public void ModEnergy(int value)
             {
-            Energy+=a;
+            Energy+=value;
             Energy=Math.Min(Energy,MaxEnergy);
             Energy=Math.Max(Energy,0);
             }

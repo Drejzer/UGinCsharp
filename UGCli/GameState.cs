@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UGinCsharp;
 
 namespace UGCli
     {
@@ -13,6 +12,7 @@ namespace UGCli
         public static Room _Room = new Room();
         public static Hero Player;
         public static ICollection<Creature> Actors;
-        public static long timer;
+        public static ICollection<Creature> Actors;
+        public static long timer=0;
         }
     }

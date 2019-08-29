@@ -32,7 +32,7 @@
                     </Button.Background>
                 </Button>
                 <Button Content="Inspect" Canvas.Left="250" Canvas.Top="10" Width="75"/>
-                <TextBox x:Name="DescriptionBox" Height="133" Canvas.Left="10" TextWrapping="Wrap" Text="TextBox" Canvas.Top="542" Width="458"/>
+                <ContentControl x:Name="DescriptionBox" Height="133" Canvas.Left="10" Canvas.Top="542" Width="458"/>
                 <Button Name="EquippedWeapon" Content="Weapon" Canvas.Left="10" Canvas.Top="75" Width="80"  Height="70"/>
                 <Button x:Name="ItemSlot1" Content="Empty" Canvas.Left="133" Canvas.Top="75" Width="80" Height="70" OpacityMask="#FFB88888" Background="White"/>
                 <Button x:Name="ItemSlot2" Content="Empty" Canvas.Left="133" Canvas.Top="172" Width="80" Height="70"/>
@@ -69,7 +69,7 @@
                 <Image Name="DisplayTile24" Height="80" Width="80" Canvas.Left="309" Canvas.Top="151"/>
                 <Image Name="DisplayTile25" Height="80" Width="80" Canvas.Left="389" Canvas.Top="151"/>
                 <Image Name="DisplayTile26" Height="80" Width="80" Canvas.Left="469" Canvas.Top="151"/>
-                <Image Name="DisplayTile27" Height="80" Width="80" Canvas.Left="549" Canvas.Top="151"/>
+                <Image Name="DisplayTile27" Height="80" Width="80" Canvas.Left="549" Canvas.Top="151" Source="Resources\PHtile2.png"/>
                 <Image Name="DisplayTile28" Height="80" Width="80" Canvas.Left="629" Canvas.Top="151"/>
                 <Image Name="DisplayTile30" Height="80" Width="80" Canvas.Left="-11" Canvas.Top="231"/>
                 <Image Name="DisplayTile31" Height="80" Width="80" Canvas.Left="69" Canvas.Top="231"/>
@@ -84,8 +84,8 @@
                 <Image Name="DisplayTile41" Height="80" Width="80" Canvas.Left="69" Canvas.Top="311"/>
                 <Image Name="DisplayTile42" Height="80" Width="80" Canvas.Left="149" Canvas.Top="311"/>
                 <Image Name="DisplayTile43" Height="80" Width="80" Canvas.Left="229" Canvas.Top="311"/>
-                <Image Name="DisplayTile44" Height="80" Width="80" Canvas.Left="309" Canvas.Top="311" Source="PHtile1.png"/>
-                <Image Name="DisplayTile45" Height="80" Width="80" Canvas.Left="389" Canvas.Top="311"/>
+                <Image Name="DisplayTile44" Height="80" Width="80" Canvas.Left="309" Canvas.Top="311" Source="Resources\PHtile1.png"/>
+                <Image Name="DisplayTile45" Height="80" Width="80" Canvas.Left="389" Canvas.Top="311" Source="Resources\PHtile2.png"/>
                 <Image Name="DisplayTile46" Height="80" Width="80" Canvas.Left="469" Canvas.Top="311"/>
                 <Image Name="DisplayTile47" Height="80" Width="80" Canvas.Left="549" Canvas.Top="311"/>
                 <Image Name="DisplayTile48" Height="80" Width="80" Canvas.Left="629" Canvas.Top="311"/>
