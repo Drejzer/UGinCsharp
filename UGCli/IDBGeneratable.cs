@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace UGCli
     {
-    interface IMobile
+    interface IDBGeneratable
         {
-        int Move(int x,int y);
+        void GenerateFromDB();
         }
     }

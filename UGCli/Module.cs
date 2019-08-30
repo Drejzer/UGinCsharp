@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UGCli
     {
-    public class Module : Item, IEquipable
+    public class Module : Item, IEquipable, IDBGeneratable
         {
 
         public ICollection<Perk> Perks { get; set; }
@@ -23,6 +23,10 @@ namespace UGCli
                 {
                 i.Deactivate(a);
                 }
+            }
+        public void GenerateFromDB()
+            {
+            throw new NotImplementedException();
             }
         }
     }

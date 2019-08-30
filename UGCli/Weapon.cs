@@ -10,7 +10,7 @@ namespace UGCli
     /// Weapon used by a creature to atack other creatures.
     /// </summary>
     [Serializable]
-    public class Weapon: Item,IEquipable
+    public class Weapon: Item,IEquipable,IDBGeneratable
         {
         /// <summary>
         /// Damage dealt by a succesful attack, depends on the Strenght of a creature
@@ -24,8 +24,14 @@ namespace UGCli
 
         public Weapon():base()
             {
+            Id=1000;
+            Name="Basic Attack";
+            _baseDamage=0;
+            _scaling=1;
+            _speed=700;
 
             }
+        
         public void Equip(Creature a)
             {
             User=a;
@@ -50,7 +56,7 @@ namespace UGCli
             {
             throw new NotImplementedException();
             }
-        public override void GeneratefromDB()
+        public void GenerateFromDB()
             {
 #warning finish dat
             }

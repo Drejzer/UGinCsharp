@@ -12,11 +12,12 @@ namespace UGCli
         UG_Context() : base()
             { }
         public DbSet<Creature> Creatures { get; set; }
-        public DbSet<TileType> TileTypes { get; set; }
-        public DbSet<TileInstance> TileInstances { get; set; }
+        public DbSet<CellType> TileTypes { get; set; }
+        public DbSet<CellInstance> TileInstances { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Perk> Perks { get; set; }
         public DbSet<Weapon> Weapons { get; set; }
         public DbSet<Module> Modules { get; set; }
+        public DbSet<GameState> GameStates { get; set; }
         }
     }

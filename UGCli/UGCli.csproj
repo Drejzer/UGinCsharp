@@ -65,19 +65,36 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Creature.cs" />
+    <Compile Include="GameHandler.cs" />
     <Compile Include="GameState.cs" />
+    <Compile Include="GameWindow.xaml.cs">
+      <DependentUpon>GameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MinorHealth_Boost.cs" />
     <Compile Include="ICombatant.cs" />
     <Compile Include="IEquipable.cs" />
     <Compile Include="IMobile.cs" />
+    <Compile Include="IDBGeneratable.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="IUsable.cs" />
+    <Compile Include="MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Module.cs" />
     <Compile Include="Perk.cs" />
     <Compile Include="Room.cs" />
-    <Compile Include="TileType.cs" />
-    <Compile Include="TileInstance.cs" />
+    <Compile Include="CellType.cs" />
+    <Compile Include="CellInstance.cs" />
     <Compile Include="UG_Context.cs" />
     <Compile Include="Weapon.cs" />
+    <Page Include="GameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -111,6 +128,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\CellInstance.datasource" />
+    <None Include="Properties\DataSources\Hero.datasource" />
+    <None Include="Properties\DataSources\Room.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

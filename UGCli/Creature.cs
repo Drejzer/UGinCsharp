@@ -5,18 +5,20 @@ namespace UGCli
     {
     /// <summary>
     /// Parent class for all enemies and player characters.
-    /// Contains basic statistics shared by all, as well as required 
+    /// Contains basic statistics shared by all, as well as common methods
     /// </summary>
     [Serializable]
     public abstract class Creature
         {
-        public event EventHandler Halp;
-
+        /// <summary>
+        /// Name of the Creture
+        /// </summary>
+        public string Name { get; protected set; }
         /// <summary>
         /// Designates power of a creature, Affects Health and Enegry
         /// </summary>
         public int Level { get; protected set; }
-        private int _xpToNextLvl;
+        protected int _xpToNextLvl;
         /// <summary>
         /// Influences Damage and carrying capcity (TODO)
         /// </summary>
@@ -26,7 +28,7 @@ namespace UGCli
         /// </summary>
         public int Agility { get; protected set; }
         /// <summary>
-        /// Energy Reserves and Perk Capacity
+        /// Energy Reserves
         /// </summary>
         public int Magic { get; protected set; }
         /// <summary>
@@ -37,17 +39,25 @@ namespace UGCli
         /// movement speed in time per tile;<br/>
         /// negative means the creature is immobile;<br/>
         /// </summary>
-        private int _baseSpeed;
-        private int _baseHealth;
-        private int _baseEnergy;
+        protected int _baseSpeed;
+        protected int _baseHealth;
+        protected int _baseEnergy;
+        /// <summary>
+        /// What character is used to display this creature
+        /// </summary>
+        public char Representation { get; protected set; }
 
+        protected int _baseAtack;
+        protected int _baseDefense;
+        public int AtkBonus { get; set; }
+        public int DefBonus { get; set; }
         public int MaxHealth { get; protected set; }
         public int Health { get; protected set; }
         public int MaxEnergy { get; protected set; }
         public int Energy { get; protected set; }
         public double SpeedBonus { get; protected set; }
-        public int EnergyBonus { get; protected set; }
-        public int HealthBonus { get; protected set; } 
+        public int EnergyBonus { get; set; }
+        public int HealthBonus { get; set; } 
         /// <summary>
         /// The coordinates of a creature within a Room
         /// </summary>
@@ -104,6 +114,7 @@ namespace UGCli
                 {
                 ++Level;
                 _xpToNextLvl+=100*Level*Level;
+                Recalc();
                 }
 
             }

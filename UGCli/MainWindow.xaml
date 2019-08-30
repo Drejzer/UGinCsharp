@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UGCli"
         mc:Ignorable="d"
-        Title="MainWindow" Height="732.528" Width="1192.753">
-    <Grid Margin="0,0,2,-2">
+        Title="MainWindow" Height="742.528" Width="1192.753">
+
+    <Grid Margin="0">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                 <GradientStop Color="Black" Offset="1"/>
@@ -21,9 +22,8 @@
         </Grid.OpacityMask>
         <DockPanel LastChildFill="False" Margin="707,10,5,10">
             <Canvas x:Name="Status" Height="685" VerticalAlignment="Top" Width="478">
-                <Button Content="Attack" Canvas.Left="10" Canvas.Top="10" Width="75" Background="#FFDC0D0D"/>
-                <Button Content="Move" Canvas.Left="90" Canvas.Top="10" Width="75" Background="#FF10CBA0"/>
-                <Button Content="Interact" Canvas.Left="170" Canvas.Top="10" Width="75">
+                <Button Content="Attack" Canvas.Left="170" Canvas.Top="168" Width="75" Background="#FFDC0D0D"/>
+                <Button Content="Interact" Canvas.Left="292" Canvas.Top="192" Width="75">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                             <GradientStop Color="#FF626A11" Offset="0"/>
@@ -31,102 +31,97 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
-                <Button Content="Inspect" Canvas.Left="250" Canvas.Top="10" Width="75"/>
-                <ContentControl x:Name="DescriptionBox" Height="133" Canvas.Left="10" Canvas.Top="542" Width="458"/>
-                <Button Name="EquippedWeapon" Content="Weapon" Canvas.Left="10" Canvas.Top="75" Width="80"  Height="70"/>
-                <Button x:Name="ItemSlot1" Content="Empty" Canvas.Left="133" Canvas.Top="75" Width="80" Height="70" OpacityMask="#FFB88888" Background="White"/>
-                <Button x:Name="ItemSlot2" Content="Empty" Canvas.Left="133" Canvas.Top="172" Width="80" Height="70"/>
-                <Button x:Name="ItemSlot3" Content="Empty" Canvas.Left="133" Canvas.Top="276" Width="80" Height="70"/>
-                <Button x:Name="ItemSlot4" Content="Empty" Canvas.Left="133" Canvas.Top="372" Width="80" Height="70"/>
-                <Button x:Name="ItemSlot5" Content="Empty" Canvas.Left="133" Canvas.Top="467" Width="80" Height="70"/>
-                <Button Content="Rest" Canvas.Left="344" Canvas.Top="10" Width="76"/>
+                <Button Content="Inspect" Canvas.Left="188" Canvas.Top="254" Width="75">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                            <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                            <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                            <GradientStop Color="#FF978888" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button Name="EquippedWeapon" Content="Weapon" Canvas.Left="398" Canvas.Top="478" Width="80"  Height="70">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF3F3F3" Offset="0.52"/>
+                            <GradientStop Color="#FFF30404" Offset="0.197"/>
+                            <GradientStop Color="#FFF30404" Offset="0.78"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="ItemSlot1" Content="Empty" Canvas.Left="320" Canvas.Top="478" Width="80" Height="70" OpacityMask="#FFB88888">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="ItemSlot2" Content="Empty" Canvas.Left="240" Canvas.Top="478" Width="80" Height="70">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="ItemSlot3" Content="Empty" Canvas.Left="80" Canvas.Top="478" Width="80" Height="70">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="ItemSlot4" Content="Empty" Canvas.Left="160" Canvas.Top="478" Width="80" Height="70">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="ItemSlot5" Content="Empty" Canvas.Top="478" Width="80" Height="70">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="ShowStatusButton" Content="Status" Canvas.Left="342" Canvas.Top="260" Width="76" Foreground="#FF422A2A" Background="#FF916262"/>
+                <Button x:Name="NewGameButton" Content="&#xA;New Game&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="121" FontSize="30" Click="NewGameButton_Click" Canvas.Left="113" Canvas.Top="558">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0.14"/>
+                            <GradientStop Color="#FF0FE84A" Offset="0.54"/>
+                            <GradientStop Color="#FF000401" Offset="0.873"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="LoadGameButton" Content="&#xA;Load Game&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="117" FontSize="30" Click="LoadGameButton_Click" Canvas.Left="292" Canvas.Top="558">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0.14"/>
+                            <GradientStop Color="#FF1BB1D3" Offset="0.567"/>
+                            <GradientStop Color="#FF010B0D" Offset="0.917"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <TextBlock x:Name="CommentBox" Height="71" TextWrapping="Wrap" Text="TextBox" Canvas.Top="10" Width="468" Background="White" Canvas.Left="10"/>
             </Canvas>
         </DockPanel>
         <DockPanel HorizontalAlignment="Left" Height="690" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="697" RenderTransformOrigin="0.5,0.5">
-            <Canvas Name="Display" Background="#FF20341C" VerticalAlignment="Stretch" Width="693">
-                <Image Name="DisplayTile00" Height="80" Width="80" Canvas.Left="-11" Canvas.Top="-9"/>
-                <Image Name="DisplayTile01" Height="80" Width="80" Canvas.Left="69" Canvas.Top="-9"/>
-                <Image Name="DisplayTile02" Height="80" Width="80" Canvas.Left="149" Canvas.Top="-9"/>
-                <Image Name="DisplayTile03" Height="80" Width="80" Canvas.Left="229" Canvas.Top="-9"/>
-                <Image Name="DisplayTile04" Height="80" Width="80" Canvas.Left="309" Canvas.Top="-9"/>
-                <Image Name="DisplayTile05" Height="80" Width="80" Canvas.Left="389" Canvas.Top="-9"/>
-                <Image Name="DisplayTile06" Height="80" Width="80" Canvas.Left="469" Canvas.Top="-9"/>
-                <Image Name="DisplayTile07" Height="80" Width="80" Canvas.Left="549" Canvas.Top="-9"/>
-                <Image Name="DisplayTile08" Height="80" Width="80" Canvas.Left="629" Canvas.Top="-9"/>
-                <Image Name="DisplayTile10" Height="80" Width="80" Canvas.Left="-11" Canvas.Top="71"/>
-                <Image Name="DisplayTile11" Height="80" Width="80" Canvas.Left="69" Canvas.Top="71"/>
-                <Image Name="DisplayTile12" Height="80" Width="80" Canvas.Left="149" Canvas.Top="71"/>
-                <Image Name="DisplayTile13" Height="80" Width="80" Canvas.Left="229" Canvas.Top="71"/>
-                <Image Name="DisplayTile14" Height="80" Width="80" Canvas.Left="309" Canvas.Top="71"/>
-                <Image Name="DisplayTile15" Height="80" Width="80" Canvas.Left="389" Canvas.Top="71"/>
-                <Image Name="DisplayTile16" Height="80" Width="80" Canvas.Left="469" Canvas.Top="71"/>
-                <Image Name="DisplayTile17" Height="80" Width="80" Canvas.Left="549" Canvas.Top="71"/>
-                <Image Name="DisplayTile18" Height="80" Width="80" Canvas.Left="629" Canvas.Top="71"/>
-                <Image Name="DisplayTile20" Height="80" Width="80" Canvas.Left="-11" Canvas.Top="151"/>
-                <Image Name="DisplayTile21" Height="80" Width="80" Canvas.Left="69" Canvas.Top="151"/>
-                <Image Name="DisplayTile22" Height="80" Width="80" Canvas.Left="149" Canvas.Top="151"/>
-                <Image Name="DisplayTile23" Height="80" Width="80" Canvas.Left="229" Canvas.Top="151"/>
-                <Image Name="DisplayTile24" Height="80" Width="80" Canvas.Left="309" Canvas.Top="151"/>
-                <Image Name="DisplayTile25" Height="80" Width="80" Canvas.Left="389" Canvas.Top="151"/>
-                <Image Name="DisplayTile26" Height="80" Width="80" Canvas.Left="469" Canvas.Top="151"/>
-                <Image Name="DisplayTile27" Height="80" Width="80" Canvas.Left="549" Canvas.Top="151" Source="Resources\PHtile2.png"/>
-                <Image Name="DisplayTile28" Height="80" Width="80" Canvas.Left="629" Canvas.Top="151"/>
-                <Image Name="DisplayTile30" Height="80" Width="80" Canvas.Left="-11" Canvas.Top="231"/>
-                <Image Name="DisplayTile31" Height="80" Width="80" Canvas.Left="69" Canvas.Top="231"/>
-                <Image Name="DisplayTile32" Height="80" Width="80" Canvas.Left="149" Canvas.Top="231"/>
-                <Image Name="DisplayTile33" Height="80" Width="80" Canvas.Left="229" Canvas.Top="231"/>
-                <Image Name="DisplayTile34" Height="80" Width="80" Canvas.Left="309" Canvas.Top="231"/>
-                <Image Name="DisplayTile35" Height="80" Width="80" Canvas.Left="389" Canvas.Top="231"/>
-                <Image Name="DisplayTile36" Height="80" Width="80" Canvas.Left="469" Canvas.Top="231"/>
-                <Image Name="DisplayTile37" Height="80" Width="80" Canvas.Left="549" Canvas.Top="231"/>
-                <Image Name="DisplayTile38" Height="80" Width="80" Canvas.Left="629" Canvas.Top="231"/>
-                <Image Name="DisplayTile40" Height="80" Width="80" Canvas.Left="-11" Canvas.Top="311"/>
-                <Image Name="DisplayTile41" Height="80" Width="80" Canvas.Left="69" Canvas.Top="311"/>
-                <Image Name="DisplayTile42" Height="80" Width="80" Canvas.Left="149" Canvas.Top="311"/>
-                <Image Name="DisplayTile43" Height="80" Width="80" Canvas.Left="229" Canvas.Top="311"/>
-                <Image Name="DisplayTile44" Height="80" Width="80" Canvas.Left="309" Canvas.Top="311" Source="Resources\PHtile1.png"/>
-                <Image Name="DisplayTile45" Height="80" Width="80" Canvas.Left="389" Canvas.Top="311" Source="Resources\PHtile2.png"/>
-                <Image Name="DisplayTile46" Height="80" Width="80" Canvas.Left="469" Canvas.Top="311"/>
-                <Image Name="DisplayTile47" Height="80" Width="80" Canvas.Left="549" Canvas.Top="311"/>
-                <Image Name="DisplayTile48" Height="80" Width="80" Canvas.Left="629" Canvas.Top="311"/>
-                <Image Name="DisplayTile50" Height="80" Width="80" Canvas.Left="-11" Canvas.Top="391"/>
-                <Image Name="DisplayTile51" Height="80" Width="80" Canvas.Left="69" Canvas.Top="391"/>
-                <Image Name="DisplayTile52" Height="80" Width="80" Canvas.Left="149" Canvas.Top="391"/>
-                <Image Name="DisplayTile53" Height="80" Width="80" Canvas.Left="229" Canvas.Top="391"/>
-                <Image Name="DisplayTile54" Height="80" Width="80" Canvas.Left="309" Canvas.Top="391"/>
-                <Image Name="DisplayTile55" Height="80" Width="80" Canvas.Left="389" Canvas.Top="391"/>
-                <Image Name="DisplayTile56" Height="80" Width="80" Canvas.Left="469" Canvas.Top="391"/>
-                <Image Name="DisplayTile57" Height="80" Width="80" Canvas.Left="549" Canvas.Top="391"/>
-                <Image Name="DisplayTile58" Height="80" Width="80" Canvas.Left="629" Canvas.Top="391"/>
-                <Image Name="DisplayTile60" Height="80" Width="80" Canvas.Left="-11" Canvas.Top="471"/>
-                <Image Name="DisplayTile61" Height="80" Width="80" Canvas.Left="69" Canvas.Top="471"/>
-                <Image Name="DisplayTile62" Height="80" Width="80" Canvas.Left="149" Canvas.Top="471"/>
-                <Image Name="DisplayTile63" Height="80" Width="80" Canvas.Left="229" Canvas.Top="471"/>
-                <Image Name="DisplayTile64" Height="80" Width="80" Canvas.Left="309" Canvas.Top="471"/>
-                <Image Name="DisplayTile65" Height="80" Width="80" Canvas.Left="389" Canvas.Top="471"/>
-                <Image Name="DisplayTile66" Height="80" Width="80" Canvas.Left="469" Canvas.Top="471"/>
-                <Image Name="DisplayTile67" Height="80" Width="80" Canvas.Left="549" Canvas.Top="471"/>
-                <Image Name="DisplayTile68" Height="80" Width="80" Canvas.Left="629" Canvas.Top="471"/>
-                <Image Name="DisplayTile70" Height="80" Width="80" Canvas.Left="-11" Canvas.Top="551"/>
-                <Image Name="DisplayTile71" Height="80" Width="80" Canvas.Left="69" Canvas.Top="551"/>
-                <Image Name="DisplayTile72" Height="80" Width="80" Canvas.Left="149" Canvas.Top="551"/>
-                <Image Name="DisplayTile73" Height="80" Width="80" Canvas.Left="229" Canvas.Top="551"/>
-                <Image Name="DisplayTile74" Height="80" Width="80" Canvas.Left="309" Canvas.Top="551"/>
-                <Image Name="DisplayTile75" Height="80" Width="80" Canvas.Left="389" Canvas.Top="551"/>
-                <Image Name="DisplayTile76" Height="80" Width="80" Canvas.Left="469" Canvas.Top="551"/>
-                <Image Name="DisplayTile77" Height="80" Width="80" Canvas.Left="549" Canvas.Top="551"/>
-                <Image Name="DisplayTile78" Height="80" Width="80" Canvas.Left="629" Canvas.Top="551"/>
-                <Image Name="DisplayTile80" Height="80" Width="80" Canvas.Left="-11" Canvas.Top="631"/>
-                <Image Name="DisplayTile81" Height="80" Width="80" Canvas.Left="69" Canvas.Top="631"/>
-                <Image Name="DisplayTile82" Height="80" Width="80" Canvas.Left="149" Canvas.Top="631"/>
-                <Image Name="DisplayTile83" Height="80" Width="80" Canvas.Left="229" Canvas.Top="631"/>
-                <Image Name="DisplayTile84" Height="80" Width="80" Canvas.Left="309" Canvas.Top="631"/>
-                <Image Name="DisplayTile85" Height="80" Width="80" Canvas.Left="389" Canvas.Top="631"/>
-                <Image Name="DisplayTile86" Height="80" Width="80" Canvas.Left="469" Canvas.Top="631"/>
-                <Image Name="DisplayTile87" Height="80" Width="80" Canvas.Left="549" Canvas.Top="631"/>
-                <Image Name="DisplayTile88" Height="80" Width="80" Canvas.Left="629" Canvas.Top="631"/>
-            </Canvas>
+            <ScrollViewer>
+                <TextBlock x:Name="ExpositionDevice" Height="690" Width="697" VerticalAlignment="Top" Foreground="White" Background="Black" FontFamily="Consolas" TextDecorations="{x:Null}"><Run Background="Black" Text="                                                                                                         "/></TextBlock>
+            </ScrollViewer>
+
         </DockPanel>
+        <DataGrid HorizontalAlignment="Left" Height="100" Margin="1768,34,-683,0" VerticalAlignment="Top" Width="100"/>
 
     </Grid>
+
 </Window>
+
+ 

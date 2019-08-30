@@ -28,19 +28,17 @@ namespace UGCli
         /// <summary>
         /// DB connection
         /// </summary>
-        public virtual ICollection<Creature> Modules { get; set; }
+        public virtual ICollection<Module> Modules { get; set; }
         /// <summary>
         /// Applies the effets of a perk to a creature
         /// </summary>
         /// <param name="kappa"></param>
-        /// <returns></returns>
-        public abstract bool Activate(Creature kappa);
+        public abstract void Activate(Creature kappa);
         /// <summary>
         /// removes the effects of a perk from a creacute
         /// </summary>
         /// <param name="kappa"></param>
-        /// <returns></returns>
-        public abstract bool Deactivate(Creature kappa);
+        public abstract void Deactivate(Creature kappa);
 
 
         }
