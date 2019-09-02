@@ -34,5 +34,10 @@ namespace UGCli
             {
 
             }
+
+        private void DataGrid_SelectionChanged(object sender,SelectionChangedEventArgs e)
+            {
+
+            }
         }
     }

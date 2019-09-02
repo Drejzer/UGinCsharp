@@ -30,19 +30,23 @@ namespace UGCli
             ItemSlot4.Visibility=Visibility.Hidden;
             ItemSlot5.Visibility=Visibility.Hidden;
             ShowStatusButton.Visibility=Visibility.Hidden;
+            MovementLabel.Visibility=Visibility.Hidden;
+            MoveDownButton.Visibility=Visibility.Hidden;
+            MoveLeftButton.Visibility=Visibility.Hidden;
+            MoveLeftDownButton.Visibility=Visibility.Hidden;
+            MoveLeftUpBtton.Visibility=Visibility.Hidden;
+            MoveRightButton.Visibility=Visibility.Hidden;
+            MoveRightDownBtton.Visibility=Visibility.Hidden;
+            MoveRightUpBtton.Visibility=Visibility.Hidden;
+            MoveUpButton.Visibility=Visibility.Hidden;
+            StayButton.Visibility=Visibility.Hidden;
+            CommentBox.Text="...";
             }
         private void NewGameButton_Click(object sender,RoutedEventArgs e)
             {
             GameHandler.StartNewGame();
-            EquippedWeapon.Visibility=Visibility.Visible;
-            ItemSlot1.Visibility=Visibility.Visible;
-            ItemSlot2.Visibility=Visibility.Visible;
-            ItemSlot3.Visibility=Visibility.Visible;
-            ItemSlot4.Visibility=Visibility.Visible;
-            ItemSlot5.Visibility=Visibility.Visible;
-            ShowStatusButton.Visibility=Visibility.Visible;
-            ExpositionDevice.Text=GameHandler.State._Room.Layout.ToString();
-
+            ExpositionDevice.Text=GameHandler.State._Room.ToString();
+            MakeVisible();
             }
 
         private void LoadGameButton_Click(object sender,RoutedEventArgs e)
@@ -53,6 +57,51 @@ namespace UGCli
         private void ShowStatusButton_Click(object sender,RoutedEventArgs e)
             {
 
+            }
+
+        private void NewGameButton_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="New Game: Begins a new game.";
+            }
+
+        private void NewGameButton_MouseLeave(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="...";
+            }
+
+        private void LoadGameButton_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="New Game: Begins a new game.";
+            }
+
+        private void LoadGameButton_MouseLeave(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="...";
+            }
+        private void MakeVisible()
+            {
+            EquippedWeapon.Visibility=Visibility.Visible;
+            ItemSlot1.Visibility=Visibility.Visible;
+            ItemSlot2.Visibility=Visibility.Visible;
+            ItemSlot3.Visibility=Visibility.Visible;
+            ItemSlot4.Visibility=Visibility.Visible;
+            ItemSlot5.Visibility=Visibility.Visible;
+            ShowStatusButton.Visibility=Visibility.Visible;
+            MoveDownButton.Visibility=Visibility.Visible;
+            MoveLeftButton.Visibility=Visibility.Visible;
+            MoveLeftDownButton.Visibility=Visibility.Visible;
+            MoveLeftUpBtton.Visibility=Visibility.Visible;
+            MoveRightButton.Visibility=Visibility.Visible;
+            MoveRightDownBtton.Visibility=Visibility.Visible;
+            MoveRightUpBtton.Visibility=Visibility.Visible;
+            MoveUpButton.Visibility=Visibility.Visible;
+            MovementLabel.Visibility=Visibility.Visible;
+            StayButton.Visibility=Visibility.Visible;
+            }
+
+        private void ComboBox_SelectionChanged(object sender,SelectionChangedEventArgs e)
+            {
+            
             }
         }
     }

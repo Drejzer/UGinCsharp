@@ -18,7 +18,7 @@ namespace UGCli
         public Creature Occupant;
         public CellInstance()
             {
-            cellType
+            cellType=new CellType();
             }
 
         public CellInstance(int X, int Y)
