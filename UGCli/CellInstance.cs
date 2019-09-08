@@ -8,7 +8,7 @@ namespace UGCli
     {
     public class CellInstance
         {
-
+        public event EventHandler<WallDropArgs> DiggedThrough;
         /// <summary>
         /// Posiotion of a Tile instance within a Room
         /// </summary>
@@ -56,6 +56,7 @@ namespace UGCli
         public void DigThrough()
             {
             cellType=new GenericCell(2);
+
             }
         }
     }

@@ -16,19 +16,19 @@ namespace UGCli
         /// Damage dealt by a succesful attack, depends on the Strenght of a creature
         /// </summary>
         public int Damage { get; private set; }
-        private int _baseDamage;
-        private double _scaling;
-        private int _speed;
+        protected int _baseDamage;
+        protected double _scaling;
+        protected int _speed;
         public Creature User;
 
-        public Weapon():base()
+        public Weapon(int i=0)
             {
-            Id=1000;
+            Id=1000+i;
             Name="Basic Attack";
-            _baseDamage=0;
-            _scaling=1;
+            _baseDamage=1;
+            _scaling=0.1;
             _speed=700;
-
+            Value=0;
             }
         
         public void Equip(Creature a)

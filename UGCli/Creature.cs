@@ -58,12 +58,20 @@ namespace UGCli
         /// <summary>
         /// The coordinates of a creature within a Room
         /// </summary>
-        public (int x, int y) Position { get; protected set; }
+        public int PositionX { get; protected set; }
+        public int PositionY { get; protected set; }
         public Weapon weapon;
         /// <summary>
         /// Holds loot dropped at death
         /// </summary>
         public Item Loot;
+
+        public Creature()
+            {
+            
+            }
+
+
         /// <summary>
         /// Logic of the AI<br/>
         /// In case of players, interaction logic
@@ -116,6 +124,12 @@ namespace UGCli
                 Recalc();
                 }
 
+            }
+
+        public void Relocate(int x,int y)
+            {
+            PositionX=x;
+            PositionY=y;
             }
 
         protected void FireHealthCHanged()

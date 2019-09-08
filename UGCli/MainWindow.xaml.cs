@@ -41,13 +41,14 @@ namespace UGCli
             StayButton.Visibility=Visibility.Hidden;
             HPBar.Visibility=Visibility.Hidden;
             EBar.Visibility=Visibility.Hidden;
+            InventoryPreview.Visibility=Visibility.Hidden;
             CommentBox.Text="...";
             string kappa = "";
             for (int i=0;i<62;++i)
                 {
                 for(int j=0;j<200;++j)
                     {
-                    kappa+='#';
+                    kappa+='/';
                     }
                 kappa+='\n';
                 }
@@ -57,13 +58,23 @@ namespace UGCli
             {
             GameHandler.StartNewGame();
             ExpositionDevice.Text=GameHandler.State._Room.ToString();
-            GameHandler.TurnPassed+=UpdateDisplay;
             GameHandler.State.Player.OnHealthChanged+=Player_OnHealthChanged;
             GameHandler.State.Player.OnEnergyChanged+=Player_OnEnergyChanged;
-            GameHandler.State.Player.OnFinishedMove+=Player_OnFinishedMove; ;
+            GameHandler.State.Player.OnFinishedMove+=Player_OnFinishedMove;
+            GameHandler.State.Player.OnStartingMove+=Player_OnStartingMove; ;
             Player_OnHealthChanged(this,EventArgs.Empty);
             Player_OnEnergyChanged(this,EventArgs.Empty);
+            GameHandler.TurnPassed+=UpdateDisplay;
+            InventoryPreview.ItemsSource=GameHandler.State.Player.Inventory;
+            InventoryPreview.DisplayMemberPath=Name;
+            GameHandler.State.Player.Inventory.Add(new Weapon());
+            Task task = new Task(new Action(GameHandler.Gameplay));
             MakeVisible();
+            }
+
+        private void Player_OnStartingMove(object sender,MoveDirData e)
+            {
+            UpdateDisplay(sender,e);
             }
 
         private void Player_OnFinishedMove(object sender,MoveDirData e)
@@ -85,7 +96,7 @@ namespace UGCli
 
         private void UpdateDisplay(object sender,EventArgs e)
             {
-            ExpositionDevice.Text=GameHandler.State.ToString();
+            ExpositionDevice.Text=GameHandler.State._Room.ToString();
             }
 
         private void LoadGameButton_Click(object sender,RoutedEventArgs e)
@@ -129,6 +140,7 @@ namespace UGCli
             StayButton.Visibility=Visibility.Visible;
             HPBar.Visibility=Visibility.Visible;
             EBar.Visibility=Visibility.Visible;
+            InventoryPreview.Visibility=Visibility.Visible;
             }
 
         private void HPBar_MouseEnter(object sender,MouseEventArgs e)
@@ -266,6 +278,11 @@ namespace UGCli
         private void WeaponBoostButton_MouseEnter(object sender,MouseEventArgs e)
             {
             CommentBox.Text="Empowers (or not - it depends) your trusty pickaxe by sacificing the Item.";
+            }
+
+        private void SelectedItem_SelectionChanged(object sender,SelectionChangedEventArgs e)
+            {
+
             }
         }
     }

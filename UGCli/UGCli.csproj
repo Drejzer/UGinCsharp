@@ -84,10 +84,13 @@
     <Compile Include="Module.cs" />
     <Compile Include="MoveDirData.cs" />
     <Compile Include="Perk.cs" />
+    <Compile Include="Pickaxe.cs" />
+    <Compile Include="RoamingMonster.cs" />
     <Compile Include="Room.cs" />
     <Compile Include="CellType.cs" />
     <Compile Include="CellInstance.cs" />
     <Compile Include="UG_Context.cs" />
+    <Compile Include="WallDropArgs.cs" />
     <Compile Include="Weapon.cs" />
     <Page Include="GameWindow.xaml">
       <SubType>Designer</SubType>
@@ -131,7 +134,9 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\CellInstance.datasource" />
+    <None Include="Properties\DataSources\GameState.datasource" />
     <None Include="Properties\DataSources\Hero.datasource" />
+    <None Include="Properties\DataSources\Item.datasource" />
     <None Include="Properties\DataSources\Room.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

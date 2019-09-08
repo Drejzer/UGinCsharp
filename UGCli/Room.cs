@@ -41,7 +41,7 @@ namespace UGCli
         public void GenerateRoom()
             {
             int[,] tmp=new int[Widht,Height],tmp2;
-            
+            bool heroplaced=false;
             int Neighbourhood;
             for(int i=0,j;i<Widht;++i)
                 {
@@ -88,11 +88,21 @@ namespace UGCli
                         }
                     }
                 }
-            for(int i = 0, j;i<Widht;++i)
+            for(int i = 0, j;i<Height;++i)
                 {
-                for(j=0;j<Height;++j)
+                for(j=0;j<Widht;++j)
                     {
-                    Layout[i,j]=new CellInstance(i,j,this,0,tmp[i,j]);
+                    Layout[j,i]=new CellInstance(j,i,this,0,tmp[j,i]);
+                    if(i>0 && j>0 && j+1<Widht && i+1<Height && !heroplaced && Layout[j,i].cellType.IsEnterable)
+                        {
+                        if(tmp[j-1,i-1]==1 &&tmp[j-1,i]==1&&tmp[j-1,i+1]==1&&tmp[j,i+1]==1&&tmp[j+1,i+1]==1&&tmp[j+1,i]==1&&tmp[j+1,i-1]==1&&tmp[j,i-1]==1)
+                            {
+                            Layout[j,i].IsOccupied=true;
+                            Layout[j,i].Occupant=GameHandler.State.Player;
+                            heroplaced=true;
+                            GameHandler.State.Player.Relocate(j,i);
+                            }
+                        }
                     }
                 }
 
@@ -182,9 +192,11 @@ namespace UGCli
 
         public override string ToString()
             {
-            string Displayed="";
+            string Displayed= new string('—',Widht);
+            Displayed="+"+Displayed+"+\n";
             for(int i = 0,j;i<Height;++i)
                 {
+                Displayed+="|";
                 for(j=0;j<Widht;++j)
                     {
                     if (Layout[j,i].IsOccupied)
@@ -196,9 +208,9 @@ namespace UGCli
                     Displayed+=Layout[j,i].cellType.Representation.ToString();
                         }
                     }
-                Displayed+="\n";
+                Displayed+="|\n";
                 }
-            return Displayed; 
+            return Displayed+"+"+new string('—',Widht)+"+"; 
             }
         }
     }
