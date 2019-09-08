@@ -10,6 +10,8 @@ namespace UGCli
     [Serializable]
     public abstract class Creature
         {
+        public event EventHandler OnHealthChanged, OnLevelUP, OnRecalc,OnEnergyChanged;
+
         /// <summary>
         /// Name of the Creture
         /// </summary>
@@ -35,11 +37,6 @@ namespace UGCli
         /// Health and general surivability
         /// </summary>
         public int Vitality { get; protected set; }
-        /// <summary>
-        /// movement speed in time per tile;<br/>
-        /// negative means the creature is immobile;<br/>
-        /// </summary>
-        protected int _baseSpeed;
         protected int _baseHealth;
         protected int _baseEnergy;
         /// <summary>
@@ -64,12 +61,12 @@ namespace UGCli
         public (int x, int y) Position { get; protected set; }
         public Weapon weapon;
         /// <summary>
-        /// Holds Special attacks or other such options
+        /// Holds loot dropped at death
         /// </summary>
-        public ((bool IsSloted, Item Mod) first, (bool IsSloted, Item Mod) second, (bool IsSloted, Item Mod) third, (bool IsSloted, Item Mod) fourth, (bool IsSloted, Item Mod) fifth) Upgrades { get; set; }
+        public Item Loot;
         /// <summary>
-        /// Logic of the AI, and in case of players: control of a Creature<br/>
-        /// Returns time necesary to complete the action to complete the action
+        /// Logic of the AI<br/>
+        /// In case of players, interaction logic
         /// </summary>
         public abstract int Action();
         /// <summary>
@@ -81,7 +78,7 @@ namespace UGCli
         public bool ModHealth(int a)
             {
             Health+=a;
-            
+            OnHealthChanged(this,EventArgs.Empty);
             return (Health>0);
             }
         /// <summary>
@@ -90,19 +87,21 @@ namespace UGCli
         /// <param name="a"></param>
         public void ModEnergy(int a)
             {
-            Energy+=a;
+            Energy+=a;            
             Energy=Math.Min(Energy,MaxEnergy);
             Energy=Math.Max(Energy,0);
+            OnEnergyChanged(this,EventArgs.Empty);
             }
         /// <summary>
         /// Calculates stats based on equipped items, and V/A/M/S
         /// </summary>
-        private void Recalc()
+        protected void Recalc()
             {
-            _baseHealth=(10+Vitality);
-            _baseEnergy=Magic;
-            MaxHealth=_baseHealth*Level+HealthBonus;
-            MaxEnergy=_baseEnergy*Level+EnergyBonus;
+            int prevHP = MaxHealth, prevE = MaxEnergy;
+            MaxHealth=_baseHealth*(1+Level)+HealthBonus;
+            MaxEnergy=_baseEnergy*(1+Level)+EnergyBonus;
+            ModEnergy(MaxEnergy-prevE);
+            ModHealth(MaxHealth-prevHP);
             }
         public virtual void LevelUp()
             {
@@ -117,6 +116,11 @@ namespace UGCli
                 Recalc();
                 }
 
+            }
+
+        protected void FireHealthCHanged()
+            {
+            OnHealthChanged(this,EventArgs.Empty);
             }
         }
     }

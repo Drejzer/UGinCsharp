@@ -10,14 +10,13 @@ namespace UGCli
     /// Weapon used by a creature to atack other creatures.
     /// </summary>
     [Serializable]
-    public class Weapon: Item,IEquipable,IDBGeneratable
+    public class Weapon: Item,IDBGeneratable
         {
         /// <summary>
         /// Damage dealt by a succesful attack, depends on the Strenght of a creature
         /// </summary>
         public int Damage { get; private set; }
         private int _baseDamage;
-        private int _range;
         private double _scaling;
         private int _speed;
         public Creature User;

@@ -7,10 +7,15 @@ using System.Data.Entity;
 
 namespace UGCli
     {
+    /// <summary>
+    /// Database Context
+    /// </summary>
     public class UG_Context: DbContext
         {
-        UG_Context() : base()
-            { }
+        public UG_Context() : base()
+            {
+            Database.SetInitializer(new DropCreateDatabaseAlways<UG_Context>());
+            }
         public DbSet<Creature> Creatures { get; set; }
         public DbSet<CellType> TileTypes { get; set; }
         public DbSet<CellInstance> TileInstances { get; set; }

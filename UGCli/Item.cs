@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace UGCli
     {
+    /// <summary>
+    /// Base class for all kinds of loot
+    /// </summary>
     [Serializable]
     public abstract class Item
         {
-        /// <summary>
-        /// 
-        /// </summary>
         public int Id { get; protected set; }
         public String Name { get; protected set; }
+        public int Value { get; protected set; }
 
         public Item()
             {

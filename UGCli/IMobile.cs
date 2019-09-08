@@ -8,6 +8,6 @@ namespace UGCli
     {
     interface IMobile
         {
-        int Move(int x,int y);
+        int Move(int dir);
         }
     }

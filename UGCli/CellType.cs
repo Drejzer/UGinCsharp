@@ -7,11 +7,11 @@ using System.Data.Entity;
 
 namespace UGCli
     {
-    public enum TypeOfCell:byte {Generic,Entrance,Exit,Item,Heal};
+    public enum TypeOfCell:byte {Generic, Special, Loot};
     /// <summary>
     /// Tile
     /// </summary>
-    public class CellType
+    public abstract class CellType:IDBGeneratable
         {
         /// <summary>
         /// ID, used by database
@@ -27,13 +27,9 @@ namespace UGCli
         /// Instances of a tile (DBstufff)
         /// </summary>
         public virtual ICollection<CellInstance> TileInstances { get; set; }
-
-        public CellType(TypeOfCell toc=0)
+        public void GenerateFromDB()
             {
-            Id=0;
-            Type=toc;
-            IsEnterable=true;
-            Representation=' ';
+
             }
         }
     }

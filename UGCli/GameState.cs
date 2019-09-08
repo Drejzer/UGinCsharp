@@ -14,15 +14,26 @@ namespace UGCli
         public Room _Room;
         public Hero Player;
         public ICollection<Creature> Actors;
-        public long Timer;
-        public SortedList<int,MethodInfo> ActionQueue;
 
         public GameState()
             {
             Depth=0;
             _Room=new Room();
-            Timer=0;
-            ActionQueue=new SortedList<int,MethodInfo>();
+            Player=new Hero();
+            Player.OnStartingMove+=PlayerStartedMove;
+            Player.OnFinishedMove+=PlayerFinishedMove;
+            }
+
+        private void PlayerFinishedMove(object sender,EventArgs e)
+            {
+            _Room.Layout[Player.Position.x,Player.Position.y].IsOccupied=true;
+            _Room.Layout[Player.Position.x,Player.Position.y].Occupant=Player;
+            }
+
+        private void PlayerStartedMove(object sender,EventArgs e)
+            {
+            _Room.Layout[Player.Position.x,Player.Position.y].IsOccupied=false;
+            _Room.Layout[Player.Position.x,Player.Position.y].Occupant=null;
             }
 
         public void GenerateFromDB()

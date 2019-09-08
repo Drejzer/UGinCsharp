@@ -20,16 +20,15 @@ namespace UGCli
     /// </summary>
     public partial class MainWindow:Window
         {
+        
         public MainWindow()
             {
             InitializeComponent();
-            EquippedWeapon.Visibility=Visibility.Hidden;
-            ItemSlot1.Visibility=Visibility.Hidden;
-            ItemSlot2.Visibility=Visibility.Hidden;
-            ItemSlot3.Visibility=Visibility.Hidden;
-            ItemSlot4.Visibility=Visibility.Hidden;
-            ItemSlot5.Visibility=Visibility.Hidden;
-            ShowStatusButton.Visibility=Visibility.Hidden;
+            WeaponBoostButton.Visibility=Visibility.Hidden;
+            XPBoostButton.Visibility=Visibility.Hidden;
+            EnergyRechargeButton.Visibility=Visibility.Hidden;
+            HealthRechargeButton.Visibility=Visibility.Hidden;
+            ItemUseButton.Visibility=Visibility.Hidden;
             MovementLabel.Visibility=Visibility.Hidden;
             MoveDownButton.Visibility=Visibility.Hidden;
             MoveLeftButton.Visibility=Visibility.Hidden;
@@ -40,13 +39,53 @@ namespace UGCli
             MoveRightUpBtton.Visibility=Visibility.Hidden;
             MoveUpButton.Visibility=Visibility.Hidden;
             StayButton.Visibility=Visibility.Hidden;
+            HPBar.Visibility=Visibility.Hidden;
+            EBar.Visibility=Visibility.Hidden;
             CommentBox.Text="...";
+            string kappa = "";
+            for (int i=0;i<62;++i)
+                {
+                for(int j=0;j<200;++j)
+                    {
+                    kappa+='#';
+                    }
+                kappa+='\n';
+                }
+            ExpositionDevice.Text=kappa;
             }
         private void NewGameButton_Click(object sender,RoutedEventArgs e)
             {
             GameHandler.StartNewGame();
             ExpositionDevice.Text=GameHandler.State._Room.ToString();
+            GameHandler.TurnPassed+=UpdateDisplay;
+            GameHandler.State.Player.OnHealthChanged+=Player_OnHealthChanged;
+            GameHandler.State.Player.OnEnergyChanged+=Player_OnEnergyChanged;
+            GameHandler.State.Player.OnFinishedMove+=Player_OnFinishedMove; ;
+            Player_OnHealthChanged(this,EventArgs.Empty);
+            Player_OnEnergyChanged(this,EventArgs.Empty);
             MakeVisible();
+            }
+
+        private void Player_OnFinishedMove(object sender,MoveDirData e)
+            {
+            UpdateDisplay(sender,e);
+            }
+
+        private void Player_OnEnergyChanged(object sender,EventArgs e)
+            {
+            Eblack.Offset=GameHandler.State.Player.MaxEnergy/GameHandler.State.Player.Energy;
+            Egreen.Offset=Eblack.Offset;
+            }
+
+        private void Player_OnHealthChanged(object sender,EventArgs e)
+            {
+            HPblack.Offset=GameHandler.State.Player.MaxHealth/GameHandler.State.Player.Health;
+            HPred.Offset=HPblack.Offset;
+            }
+
+        private void UpdateDisplay(object sender,EventArgs e)
+            {
+            ExpositionDevice.Text=GameHandler.State.ToString();
             }
 
         private void LoadGameButton_Click(object sender,RoutedEventArgs e)
@@ -64,29 +103,20 @@ namespace UGCli
             CommentBox.Text="New Game: Begins a new game.";
             }
 
-        private void NewGameButton_MouseLeave(object sender,MouseEventArgs e)
-            {
-            CommentBox.Text="...";
-            }
-
+        
         private void LoadGameButton_MouseEnter(object sender,MouseEventArgs e)
             {
-            CommentBox.Text="New Game: Begins a new game.";
+            CommentBox.Text="Load Game: resumes a preivously saved game.";
             }
 
-        private void LoadGameButton_MouseLeave(object sender,MouseEventArgs e)
-            {
-            CommentBox.Text="...";
-            }
+      
         private void MakeVisible()
             {
-            EquippedWeapon.Visibility=Visibility.Visible;
-            ItemSlot1.Visibility=Visibility.Visible;
-            ItemSlot2.Visibility=Visibility.Visible;
-            ItemSlot3.Visibility=Visibility.Visible;
-            ItemSlot4.Visibility=Visibility.Visible;
-            ItemSlot5.Visibility=Visibility.Visible;
-            ShowStatusButton.Visibility=Visibility.Visible;
+            WeaponBoostButton.Visibility=Visibility.Visible;
+            XPBoostButton.Visibility=Visibility.Visible;
+            EnergyRechargeButton.Visibility=Visibility.Visible;
+            HealthRechargeButton.Visibility=Visibility.Visible;
+            ItemUseButton.Visibility=Visibility.Visible;
             MoveDownButton.Visibility=Visibility.Visible;
             MoveLeftButton.Visibility=Visibility.Visible;
             MoveLeftDownButton.Visibility=Visibility.Visible;
@@ -97,11 +127,145 @@ namespace UGCli
             MoveUpButton.Visibility=Visibility.Visible;
             MovementLabel.Visibility=Visibility.Visible;
             StayButton.Visibility=Visibility.Visible;
+            HPBar.Visibility=Visibility.Visible;
+            EBar.Visibility=Visibility.Visible;
             }
 
-        private void ComboBox_SelectionChanged(object sender,SelectionChangedEventArgs e)
+        private void HPBar_MouseEnter(object sender,MouseEventArgs e)
             {
-            
+            CommentBox.Text="Your health\n"+"("+GameHandler.State.Player.Health+"/"+GameHandler.State.Player.MaxHealth+")";
+            }
+
+       
+        private void MoveUpButton_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="Move Up.";
+            }
+
+       
+        private void MoveRightButton_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="Move Right";
+            }
+
+       
+        private void MoveDownButton_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="Move Down";
+            }
+
+       
+        private void MoveLeftButton_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="Move Left";
+            }
+
+       
+        private void MoveLeftDownButton_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="Move diaggonaly Down and Left";
+            }
+
+        private void MoveRightDownBtton_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="Move diaggonaly Down and Right";
+            }
+
+       
+        private void MoveRightUpBtton_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="Move diaggonaly Up and Right";
+            }
+
+       
+        private void MoveLeftUpBtton_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="Move diaggonaly UP and Left";
+            }
+
+        private void StayButton_MouseEnter(object sender,MouseEventArgs e)
+            { 
+            CommentBox.Text="Stay in place";
+            }
+
+        private void ResetCommentBox(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="...";
+            }
+
+        private void ExpositionDevice_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="Map of the level.\n '#' - wall | '@' - you | ' '  '.'  ','  '*' - empty spaces\n oter things are most likely enemies, good luck";
+            }
+
+        private void MoveLeftUpBtton_Click(object sender,RoutedEventArgs e)
+            {
+            GameHandler.State.Player.Move(8);
+            }
+
+        private void MoveUpButton_Click(object sender,RoutedEventArgs e)
+            {
+            GameHandler.State.Player.Move(1);
+            }
+
+        private void MoveRightUpBtton_Click(object sender,RoutedEventArgs e)
+            {
+            GameHandler.State.Player.Move(2);
+            }
+
+        private void MoveRightButton_Click(object sender,RoutedEventArgs e)
+            {
+            GameHandler.State.Player.Move(3);
+            }
+
+        private void MoveRightDownBtton_Click(object sender,RoutedEventArgs e)
+            {
+            GameHandler.State.Player.Move(4);
+            }
+
+        private void MoveDownButton_Click(object sender,RoutedEventArgs e)
+            {
+            GameHandler.State.Player.Move(5);
+            }
+
+        private void MoveLeftDownButton_Click(object sender,RoutedEventArgs e)
+            {
+            GameHandler.State.Player.Move(6);
+            }
+
+        private void MoveLeftButton_Click(object sender,RoutedEventArgs e)
+            {
+            GameHandler.State.Player.Move(7);
+            }
+
+        private void EBar_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="Your energy\n"+"("+GameHandler.State.Player.Energy+"/"+GameHandler.State.Player.MaxEnergy+")";
+            }
+
+        private void EnergyRechargeButton_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="Turns the selected item into 1 point of Energy on the next turn";
+            }
+
+        private void XPBoostButton_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="Turns the selected item into some Experience";
+            }
+
+        private void HealthRechargeButton_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="Turns the selected item into 1 point of Health on the next turn";
+            }
+
+        private void ItemUseButton_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="Activates the item, possibly granting temporary empowerment to you, depending on the Item in question";
+            }
+
+        private void WeaponBoostButton_MouseEnter(object sender,MouseEventArgs e)
+            {
+            CommentBox.Text="Empowers (or not - it depends) your trusty pickaxe by sacificing the Item.";
             }
         }
     }

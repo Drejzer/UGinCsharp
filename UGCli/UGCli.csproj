@@ -70,6 +70,7 @@
     <Compile Include="GameWindow.xaml.cs">
       <DependentUpon>GameWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GenericCell.cs" />
     <Compile Include="MinorHealth_Boost.cs" />
     <Compile Include="ICombatant.cs" />
     <Compile Include="IEquipable.cs" />
@@ -81,6 +82,7 @@
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module.cs" />
+    <Compile Include="MoveDirData.cs" />
     <Compile Include="Perk.cs" />
     <Compile Include="Room.cs" />
     <Compile Include="CellType.cs" />
