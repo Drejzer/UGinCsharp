@@ -12,14 +12,11 @@ namespace UGCli
     [Serializable]
     public abstract class Item
         {
-        public int Id { get; protected set; }
+        public int ItemID { get; protected set; }
         public String Name { get; protected set; }
+        /// <summary>
+        /// Value in points
+        /// </summary>
         public int Value { get; protected set; }
-
-        public Item()
-            {
-            Id=-1;
-            Name="Placeholder";
-            }
         }
     }

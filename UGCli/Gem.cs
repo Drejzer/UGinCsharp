@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace UGCli
     {
-    public class WallDropArgs:EventArgs
+    class Gem:Item
         {
-        public int ItemID;
-        public bool IsProtected;
+        public Gem(int i=1)
+            {
+            Name="Shiny Thingy";
+            ItemID=i;
+            Value=i*10;
+            }
         }
     }

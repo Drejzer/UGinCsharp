@@ -8,7 +8,8 @@ namespace UGCli
     {
     public class CellInstance
         {
-        public event EventHandler<WallDropArgs> DiggedThrough;
+        public int CellInstanceID { get; set; }
+        public event EventHandler<CorpseArgs> DiggedThrough;
         /// <summary>
         /// Posiotion of a Tile instance within a Room
         /// </summary>
@@ -55,8 +56,9 @@ namespace UGCli
             }
         public void DigThrough()
             {
+            GameHandler.State.Player.ModEnergy(-1);
             cellType=new GenericCell(2);
-
+            GameHandler.State.Player.PickLoot(new Gem(GameHandler.roller.Next(1,100)));
             }
         }
     }

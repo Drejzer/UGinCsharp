@@ -16,13 +16,13 @@ namespace UGCli
         /// <summary>
         /// ID, used by database
         /// </summary>
-        public int Id { get; protected set; }
+        public int CellTypeID { get; protected set; }
         /// <summary>
         /// Determines type of the cell
         /// </summary>
         public TypeOfCell Type { get; protected set; }
-        public bool IsEnterable;
-        public char Representation;
+        public bool IsEnterable { get; set; }
+        public char Representation { get; set; }
         /// <summary>
         /// Instances of a tile (DBstufff)
         /// </summary>

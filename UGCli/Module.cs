@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UGCli
     {
-    public class Module : Item, IEquipable, IDBGeneratable
+    public class Module : Item, IDBGeneratable
         {
 
         public ICollection<Perk> Perks { get; set; }

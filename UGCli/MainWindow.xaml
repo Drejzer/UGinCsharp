@@ -34,7 +34,7 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
-                <Button x:Name="ItemUseButton" Content="Activate" Canvas.Left="290" Canvas.Top="478" Width="80" Height="70" MouseEnter="ItemUseButton_MouseEnter"  MouseLeave="ResetCommentBox">
+                <Button x:Name="ItemUseButton" Content="Activate" Canvas.Left="290" Canvas.Top="478" Width="80" Height="70" MouseEnter="ItemUseButton_MouseEnter"  MouseLeave="ResetCommentBox" Click="ItemUseButton_Click">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="Black" Offset="0"/>
@@ -43,7 +43,7 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
-                <Button x:Name="HealthRechargeButton" Content="Restore&#xD;&#xA;Health" Canvas.Left="120" Canvas.Top="478" Width="80" Height="70" MouseEnter="HealthRechargeButton_MouseEnter" MouseLeave="ResetCommentBox">
+                <Button x:Name="HealthRechargeButton" Content="Restore&#xD;&#xA;Health" Canvas.Left="120" Canvas.Top="478" Width="80" Height="70" MouseEnter="HealthRechargeButton_MouseEnter" MouseLeave="ResetCommentBox" Click="HealthRechargeButton_Click">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="Black" Offset="0"/>
@@ -52,7 +52,7 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
-                <Button x:Name="XPBoostButton" Content="Burn&#xD;&#xA;For &#xD;&#xA;Power" Canvas.Left="205" Canvas.Top="478" Width="80" Height="70" MouseEnter="XPBoostButton_MouseEnter" MouseLeave="ResetCommentBox">
+                <Button x:Name="XPBoostButton" Content="Burn&#xD;&#xA;For &#xD;&#xA;Power" Canvas.Left="205" Canvas.Top="478" Width="80" Height="70" MouseEnter="XPBoostButton_MouseEnter" MouseLeave="ResetCommentBox" Click="XPBoostButton_Click">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="Black" Offset="0"/>
@@ -61,7 +61,7 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
-                <Button x:Name="EnergyRechargeButton" Content="Restore&#xD;&#xA;Energy" Canvas.Top="478" Width="80" Height="70" Canvas.Left="35" MouseEnter="EnergyRechargeButton_MouseEnter" MouseLeave="ResetCommentBox">
+                <Button x:Name="EnergyRechargeButton" Content="Restore&#xD;&#xA;Energy" Canvas.Top="478" Width="80" Height="70" Canvas.Left="35" MouseEnter="EnergyRechargeButton_MouseEnter" MouseLeave="ResetCommentBox" Click="EnergyRechargeButton_Click">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="Black" Offset="0"/>
@@ -70,7 +70,7 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
-                <Button x:Name="NewGameButton" Content="&#xA;New Game&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="121" FontSize="30" Click="NewGameButton_Click" Canvas.Left="113" Canvas.Top="558" MouseEnter="NewGameButton_MouseEnter" MouseLeave="ResetCommentBox">
+                <Button x:Name="NewGameButton" Content="&#xA;New Game&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="152" Height="121" FontSize="30" Click="NewGameButton_Click" Canvas.Top="558" MouseEnter="NewGameButton_MouseEnter" MouseLeave="ResetCommentBox">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="Black" Offset="0.14"/>
@@ -79,7 +79,7 @@
                         </LinearGradientBrush>
                     </Button.Background>
                 </Button>
-                <Button x:Name="LoadGameButton" Content="&#xA;Load Game&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="174" Height="117" FontSize="30" Click="LoadGameButton_Click" Canvas.Left="292" Canvas.Top="558" MouseEnter="LoadGameButton_MouseEnter" MouseLeave="ResetCommentBox">
+                <Button x:Name="LoadGameButton" Content="&#xA;Load Game&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="155" Height="121" FontSize="30" Click="LoadGameButton_Click" Canvas.Left="157" Canvas.Top="558" MouseEnter="LoadGameButton_MouseEnter" MouseLeave="ResetCommentBox">
                     <Button.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="Black" Offset="0.14"/>
@@ -89,33 +89,29 @@
                     </Button.Background>
                 </Button>
                 <TextBlock x:Name="CommentBox" Height="133" TextWrapping="Wrap" Text="TextBox" Canvas.Top="10" Width="468" Background="White" Canvas.Left="10"/>
-                <Button x:Name="MoveUpButton" Content="U" Canvas.Left="38" Canvas.Top="186" Width="25" Background="#FF43CFCF" Height="25" MouseEnter="MoveUpButton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveUpButton_Click"/>
-                <Button x:Name="MoveRightButton" Content="R" Canvas.Left="63" Canvas.Top="210" Width="25" Background="#FF43CFCF" Height="25" MouseEnter="MoveRightButton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveRightButton_Click"/>
-                <Button x:Name="MoveDownButton" Content="D" Canvas.Left="38" Canvas.Top="235" Width="25" Background="#FF43CFCF" Height="25" MouseEnter="MoveDownButton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveDownButton_Click"/>
-                <Button x:Name="MoveLeftButton" Content="L" Canvas.Left="13" Canvas.Top="210" Width="25" Background="#FF43CFCF" Height="25" Mouse.MouseEnter="MoveLeftButton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveLeftButton_Click"/>
-                <Button x:Name="MoveLeftDownButton" Content="LD" Canvas.Left="13" Canvas.Top="235" Width="25" Background="#FF43CFCF" Height="25" MouseEnter="MoveLeftDownButton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveLeftDownButton_Click"/>
-                <Button x:Name="MoveRightDownBtton" Content="RD" Canvas.Left="63" Canvas.Top="235" Width="25" Background="#FF43CFCF" Height="25" MouseEnter="MoveRightDownBtton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveRightDownBtton_Click"/>
-                <Button x:Name="MoveRightUpBtton" Content="RU" Canvas.Left="63" Canvas.Top="186" Width="25" Background="#FF43CFCF" Height="25" MouseEnter="MoveRightUpBtton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveRightUpBtton_Click"/>
-                <Button x:Name="MoveLeftUpBtton" Content="LU" Canvas.Left="13" Canvas.Top="186" Width="25" Background="#FF43CFCF" Height="25" MouseEnter="MoveLeftUpBtton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveLeftUpBtton_Click"/>
-                <Button x:Name="StayButton" Content="S" Canvas.Left="38" Canvas.Top="210" Width="25" Background="#FF256161" Height="25" MouseEnter="StayButton_MouseEnter" MouseLeave="ResetCommentBox"/>
-                <Label x:Name="MovementLabel" Content="Movement" Canvas.Left="13" Canvas.Top="160" Background="#FF43CFCF" Width="75"/>
-                <ProgressBar x:Name="HPBar" Height="20" Canvas.Top="453" Width="478" MouseEnter="HPBar_MouseEnter" MouseLeave="ResetCommentBox">
-                    <ProgressBar.Background>
-                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
-                            <GradientStop x:Name="HPred" Color="Red" Offset="0.5"/>
-                            <GradientStop x:Name="HPblack" Color="Black" Offset="0.5"/>
+                <Button x:Name="MoveUpButton" Content="U" Canvas.Left="52" Canvas.Top="232" Width="39" Background="#FF43CFCF" Height="40" MouseEnter="MoveUpButton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveUpButton_Click"/>
+                <Button x:Name="MoveRightButton" Content="R" Canvas.Left="91" Canvas.Top="271" Width="39" Background="#FF43CFCF" Height="40" MouseEnter="MoveRightButton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveRightButton_Click"/>
+                <Button x:Name="MoveDownButton" Content="D" Canvas.Left="52" Canvas.Top="311" Width="39" Background="#FF43CFCF" Height="41" MouseEnter="MoveDownButton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveDownButton_Click"/>
+                <Button x:Name="MoveLeftButton" Content="L" Canvas.Left="13" Canvas.Top="271" Width="39" Background="#FF43CFCF" Height="40" Mouse.MouseEnter="MoveLeftButton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveLeftButton_Click"/>
+                <Button x:Name="MoveLeftDownButton" Content="LD" Canvas.Left="13" Canvas.Top="311" Width="39" Background="#FF43CFCF" Height="41" MouseEnter="MoveLeftDownButton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveLeftDownButton_Click"/>
+                <Button x:Name="MoveRightDownBtton" Content="RD" Canvas.Left="91" Canvas.Top="311" Width="39" Background="#FF43CFCF" Height="41" MouseEnter="MoveRightDownBtton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveRightDownBtton_Click"/>
+                <Button x:Name="MoveRightUpBtton" Content="RU" Canvas.Left="91" Canvas.Top="232" Width="39" Background="#FF43CFCF" Height="40" MouseEnter="MoveRightUpBtton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveRightUpBtton_Click"/>
+                <Button x:Name="MoveLeftUpBtton" Content="LU" Canvas.Left="13" Canvas.Top="232" Width="39" Background="#FF43CFCF" Height="40" MouseEnter="MoveLeftUpBtton_MouseEnter" MouseLeave="ResetCommentBox" Click="MoveLeftUpBtton_Click"/>
+                <Button x:Name="StayButton" Content="S" Canvas.Left="52" Canvas.Top="271" Width="39" Background="#FF256161" Height="40" MouseEnter="StayButton_MouseEnter" MouseLeave="ResetCommentBox"/>
+                <Label x:Name="MovementLabel" Content="Movement" Canvas.Left="13" Canvas.Top="189" Background="#FF43CFCF" Width="117" Height="43"/>
+                <ProgressBar x:Name="HPBar" Height="20" Canvas.Top="453" Width="478" MouseEnter="HPBar_MouseEnter" MouseLeave="ResetCommentBox"  Background="Black" Foreground="Red"/>
+                <ProgressBar x:Name="EBar" Height="20" Canvas.Top="428" Width="478" MouseEnter="EBar_MouseEnter" MouseLeave="ResetCommentBox"  Background="Black" Foreground="Green"/>
+                <ComboBox Name="InventoryPreview" Canvas.Left="143" Canvas.Top="189" Width="325" />
+                <Button x:Name="SaveGameButton" Content="&#xA;Save Game&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="155" Height="121" FontSize="30" Click="SaveGameButton_Click" Canvas.Left="317" Canvas.Top="558" MouseEnter="SaveGameButton_MouseEnter" MouseLeave="ResetCommentBox">
+                    <Button.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="Black" Offset="0.14"/>
+                            <GradientStop Color="#FFFFDC00" Offset="0.567"/>
+                            <GradientStop Color="Black" Offset="0.917"/>
+                            <GradientStop Color="Black" Offset="0.122"/>
                         </LinearGradientBrush>
-                    </ProgressBar.Background>
-                </ProgressBar>
-                <ProgressBar x:Name="EBar" Height="20" Canvas.Top="428" Width="478" MouseEnter="EBar_MouseEnter" MouseLeave="ResetCommentBox">
-                    <ProgressBar.Background>
-                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
-                            <GradientStop x:Name="Egreen" Color="Green" Offset="0.5"/>
-                            <GradientStop x:Name="Eblack" Color="Black" Offset="0.5"/>
-                        </LinearGradientBrush>
-                    </ProgressBar.Background>
-                </ProgressBar>
-                <ComboBox Name="InventoryPreview" Canvas.Left="113" Canvas.Top="160" Width="342" />
+                    </Button.Background>
+                </Button>
             </Canvas>
         </DockPanel>
         <DockPanel HorizontalAlignment="Left" Height="690" LastChildFill="False" Margin="10,10,0,0" VerticalAlignment="Top" Width="697" RenderTransformOrigin="0.5,0.5">

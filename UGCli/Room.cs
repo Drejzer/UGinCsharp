@@ -14,6 +14,7 @@ namespace UGCli
     [Serializable]
     public class Room:IDBGeneratable
         {
+        public int RoomID { get; set; }
         /// <summary>
         /// Describes the width of the room
         /// </summary>
@@ -25,7 +26,7 @@ namespace UGCli
         /// <summary>
         /// holds the layout of the room<br/>
         /// </summary>
-        public CellInstance[,] Layout;
+        public CellInstance[,] Layout { get; set; }
         /// <summary>
         /// Creates a Room (before doing anything, run GenerateRoom or LoadRoom, or else things break)
         /// </summary>
@@ -101,11 +102,27 @@ namespace UGCli
                             Layout[j,i].Occupant=GameHandler.State.Player;
                             heroplaced=true;
                             GameHandler.State.Player.Relocate(j,i);
-                            RoamingMonster kappa = new RoamingMonster();
+                            }
+                        }
+                    else if(i>0&&j>0&&j+1<Widht&&i+1<Height&&Layout[j,i].cellType.IsEnterable)
+                        {
+                        Creature kappa;
+                        int seed = GameHandler.roller.Next(1,100);
+                        if(seed<99 &&seed>90)
+                            {
+                            kappa=new RoamingMonster();
+                        GameHandler.State.Actors.Add(kappa);
+                        kappa.Relocate(j,i);
+                        Layout[j,i].IsOccupied=true;
+                        Layout[j,i].Occupant=kappa;
+                            }
+                        else if(seed>=99)
+                            {
+                            kappa=new AgressiveMonster();
                             GameHandler.State.Actors.Add(kappa);
-                            kappa.Relocate(j-1,i-1);
-                            Layout[j-1,i-1].IsOccupied=true;
-                            Layout[j-1,i-1].Occupant=kappa;
+                            kappa.Relocate(j,i);
+                            Layout[j,i].IsOccupied=true;
+                            Layout[j,i].Occupant=kappa;
                             }
                         }
                     }
@@ -117,9 +134,9 @@ namespace UGCli
 
             }
 
-        private void MarkMonsterTerytories(ref int[,] tab,int W,int H,int x,int y)
+        private void MarkMonsterTeritories(ref int[,] tab,int W,int H,int x,int y)
             {
-
+            int[,] tab2 = tab;
             }
 
         private int CountSurroundingWalls(int[,] a,int x,int y,int W,int H)

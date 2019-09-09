@@ -13,11 +13,9 @@ namespace UGCli
     public static class GameHandler
         {
         public static event EventHandler TurnPassed = delegate { };
-        public static GameState State;
+        public static GameState State { get; set; }
         public static Random roller;
         public static bool Playing = false;
-        public static List<Item> WallDrops;
-        public static List<Item> MobDrops;
 
         public static void StartNewGame()
             {
@@ -30,7 +28,21 @@ namespace UGCli
                 {
                 a.OnStartingMove+=Player_StartingMove;
                 a.OnFinishedMove+=A_OnFinishedMove;
+                a.OnKickedThebucket+=A_OnKickedThebucket;
                 }
+            }
+
+    
+
+        private static void A_OnKickedThebucket(object sender,CorpseArgs e)
+            {
+            if(e.Corpse.Loot!=null)
+                {
+                State.Player.PickLoot(e.Corpse.Loot);
+                }
+            State._Room.Layout[e.Corpse.PositionX,e.Corpse.PositionY].IsOccupied=false;
+            State._Room.Layout[e.Corpse.PositionX,e.Corpse.PositionY].Occupant=null;
+            State.Actors.Remove(e.Corpse);
             }
 
         private static void A_OnFinishedMove(object sender,MoveDirData e)
@@ -61,34 +73,47 @@ namespace UGCli
 
         public static void ProcesTurn()
             {
+            List<Creature> corpses = new List<Creature>();
             foreach(Creature a in State.Actors)
                 {
                 a.Action();
+                if(a.Health<=0)
+                    {
+                    corpses.Add(a);
+                    }
+                }
+            foreach(Creature c in corpses)
+                {
+                c.FireKicktehBucket();
                 }
             TurnPassed(null,EventArgs.Empty);
             }
 
-        public static void ProcesCombat(ref Creature A,ref Creature B)
+        public static void ProcesCombat(Creature A,Creature B)
             {
             int resolution = (roller.Next(2,40)+A.Agility+A.CombatBonus) - (roller.Next(2,40)+B.Agility+B.CombatBonus);
             if(resolution==0)
                 {
-                A.ModHealth(-(int)(B.weapon.ResolveDamage()/2));
-                B.ModHealth(-(int)(A.weapon.ResolveDamage()/2));
+                A.ModHealth(-(Math.Max(1,(int)(B.weapon.ResolveDamage()/2))));
+                B.ModHealth(-(Math.Max(1,(int)(A.weapon.ResolveDamage()/2))));
                 }
             else if(resolution<20)
                 {
-                A.ModHealth(-(int)(B.weapon.ResolveDamage()/4));
-                B.ModHealth(-(int)(3*(A.weapon.ResolveDamage())/4));
+                A.ModHealth(-(Math.Max(1,(int)(B.weapon.ResolveDamage()/4))));
+                B.ModHealth(-(Math.Max(1,(int)(3*(A.weapon.ResolveDamage())/4))));
                 }
             else if(resolution>-20)
                 {
-                B.ModHealth(-(int)(A.weapon.ResolveDamage()/4));
-                A.ModHealth(-(int)(3*(B.weapon.ResolveDamage())/4));
+                B.ModHealth(-Math.Max(1,(int)(A.weapon.ResolveDamage()/4)));
+                A.ModHealth(-Math.Max(1,(int)(3*(B.weapon.ResolveDamage())/4)));
                 }
             else if(resolution>=20)
                 {
                 B.ModHealth(-A.weapon.ResolveDamage());
+                }
+            else if(resolution<=-20)
+                {
+                A.ModHealth(-B.weapon.ResolveDamage());
                 }
             }
         }

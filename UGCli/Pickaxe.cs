@@ -15,7 +15,7 @@ namespace UGCli
 
         public Pickaxe(Hero p):base(p)
             {
-            Id+=1000;
+            ItemID+=1000;
             Name="Pickaxe";
             _scaling=1;
             _baseDamage=3;

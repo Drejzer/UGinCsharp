@@ -10,18 +10,20 @@ namespace UGCli
     [Serializable]
     public abstract class Creature
         {
-        public event EventHandler OnHealthChanged, OnLevelUP, OnRecalc,OnEnergyChanged;
+        public event EventHandler OnHealthChanged = delegate { }, OnLevelUP = delegate { }, OnRecalc = delegate { }, OnEnergyChanged = delegate { };
         public event EventHandler<MoveDirData> OnStartingMove, OnFinishedMove;
+        public event EventHandler<CorpseArgs> OnKickedThebucket = delegate { };
 
-        /// <summary>
-        /// Name of the Creture
-        /// </summary>
-        public string Name { get; protected set; }
+    /// <summary>
+    /// Name of the Creture
+    /// </summary>
+    public string Name { get; protected set; }
+    public int CreatureID{ get; protected set; }
         /// <summary>
         /// Designates power of a creature, Affects Health and Enegry
         /// </summary>
         public int Level { get; protected set; }
-        protected int _xpToNextLvl;
+        protected int _xpToNextLvl { get; set; }
         /// <summary>
         /// Influences Damage and carrying capcity (TODO)
         /// </summary>
@@ -38,15 +40,15 @@ namespace UGCli
         /// Health and general surivability
         /// </summary>
         public int Vitality { get; protected set; }
-        protected int _baseHealth;
-        protected int _baseEnergy;
+        protected int _baseHealth { get; set; }
+        protected int _baseEnergy { get; set; }
         /// <summary>
         /// What character is used to display this creature
         /// </summary>
         public char Representation { get; protected set; }
 
-        protected int _baseAtack;
-        protected int _baseDefense;
+        protected int _baseAtack { get; set; }
+        protected int _baseDefense { get; set; }
         public int CombatBonus { get; set; }
         public int MaxHealth { get; protected set; }
         public int Health { get; protected set; }
@@ -54,21 +56,21 @@ namespace UGCli
         public int Energy { get; protected set; }
         public double SpeedBonus { get; protected set; }
         public int EnergyBonus { get; set; }
-        public int HealthBonus { get; set; } 
+        public int HealthBonus { get; set; }
         /// <summary>
         /// The coordinates of a creature within a Room
         /// </summary>
         public int PositionX { get; protected set; }
         public int PositionY { get; protected set; }
-        public Weapon weapon;
+        public Weapon weapon { get; set; }
         /// <summary>
         /// Holds loot dropped at death
         /// </summary>
-        public Item Loot;
+        public Item Loot { get; set; }
 
         public Creature()
             {
-            
+
             }
 
 
@@ -83,11 +85,10 @@ namespace UGCli
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
-        public bool ModHealth(int a)
+        public virtual void ModHealth(int a)
             {
             Health+=a;
             OnHealthChanged(this,EventArgs.Empty);
-            return (Health>0);
             }
         /// <summary>
         /// modifies the energy by specified value
@@ -95,7 +96,7 @@ namespace UGCli
         /// <param name="a"></param>
         public void ModEnergy(int a)
             {
-            Energy+=a;            
+            Energy+=a;
             Energy=Math.Min(Energy,MaxEnergy);
             Energy=Math.Max(Energy,0);
             OnEnergyChanged(this,EventArgs.Empty);
@@ -140,14 +141,17 @@ namespace UGCli
             {
             OnEnergyChanged(this,EventArgs.Empty);
             }
-protected void FireOnMoveStarted(int PositionX,int PositionY,int dir)
+        protected void FireOnMoveStarted(int PositionX,int PositionY,int dir)
             {
             OnStartingMove(this,new MoveDirData(PositionX,PositionY,dir));
             }
-protected void FireOnMoveFinished(int PositionX,int  PositionY, int dir)
+        protected void FireOnMoveFinished(int PositionX,int PositionY,int dir)
             {
             OnFinishedMove(this,new MoveDirData(PositionX,PositionY,dir));
             }
-
+        public void FireKicktehBucket()
+            {
+            OnKickedThebucket(this,new CorpseArgs(this));
+            }
         }
     }

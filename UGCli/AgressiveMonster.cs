@@ -2,67 +2,82 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace UGCli
     {
-    /// <summary>
-    /// Player Character
-    /// </summary>
-    [Serializable]
-    public class Hero:Creature,IMobile
+    class AgressiveMonster:Creature, IMobile
         {
-        protected ManualResetEventSlim waitforstuff = new ManualResetEventSlim(false);
-
-        public List<Item> Inventory;
-
-        public Hero()
+        public AgressiveMonster()
             {
             Level=1;
             _xpToNextLvl=100;
-            Inventory=new List<Item>();
-            int tmp = 8;
-            Strenght=1+GameHandler.roller.Next()%tmp;
-            tmp-=(Strenght-1);
+            int tmp = 9;
+            Strenght=2+GameHandler.roller.Next()%tmp;
+            tmp-=(Strenght-2);
             Vitality=1+GameHandler.roller.Next()%tmp;
             tmp-=(Vitality-1);
-            Agility=1+GameHandler.roller.Next()%tmp;
-            tmp-=(Agility-1);
-            Magic=1+GameHandler.roller.Next()%tmp;
+            Agility=2+GameHandler.roller.Next()%tmp;
+            tmp-=(Agility-2);
+            Magic=0+GameHandler.roller.Next()%tmp;
             _baseHealth=(10+Vitality);
             _baseEnergy=5+Magic;
             MaxEnergy=_baseEnergy;
             MaxHealth=_baseHealth;
             Health=MaxHealth;
             Energy=MaxEnergy;
-            weapon=new Pickaxe(this);
-            Representation='@';
+            weapon=new Weapon(this);
+            Representation='e';
             }
 
-        public void GainExperience(int xp)
-            {
-            _xpToNextLvl-=xp;
-            if(_xpToNextLvl<=0)
-                {
-                LevelUp();
-                }
-            }
-        public override void ModHealth(int a)
-            {
-            base.ModHealth(a);
-            if(Health<=0)
-                {
-                FireKicktehBucket();
-                }
-            }
-        /// <summary>
-        /// Awaits interaction with UI
-        /// </summary>
+
         public override int Action()
             {
-            waitforstuff.Reset();
-            waitforstuff.Wait();
+            if(PositionX>GameHandler.State.Player.PositionX)
+                {
+                if(PositionY>GameHandler.State.Player.PositionY)
+                    {
+                    Move(8);
+                    }
+                else if(PositionY<GameHandler.State.Player.PositionY)
+                    {
+                    Move(6);
+                    }
+                else
+                    {
+                    Move(7);
+                    }
+                }
+            else if(PositionX<GameHandler.State.Player.PositionX)
+                {
+                    {
+                    if(PositionY>GameHandler.State.Player.PositionY)
+                        {
+                        Move(2);
+                        }
+                    else if(PositionY<GameHandler.State.Player.PositionY)
+                        {
+                        Move(4);
+                        }
+                    else
+                        {
+                        Move(3);
+                        }
+                    }
+                }
+            else
+                {
+                    {
+                    if(PositionY>GameHandler.State.Player.PositionY)
+                        {
+                        Move(1);
+                        }
+                    else if(PositionY<GameHandler.State.Player.PositionY)
+                        {
+                        Move(5);
+                        }
+                    }
+                }
             return 0;
             }
 
@@ -79,18 +94,12 @@ namespace UGCli
                                 {
                                 Relocate(PositionX,PositionY-1);
                                 }
-                            else 
+                            else if(GameHandler.State.Player.PositionX==PositionX &&GameHandler.State.Player.PositionY==PositionY-1)
                                 {
                                 GameHandler.ProcesCombat(this,GameHandler.State._Room.Layout[PositionX,PositionY-1].Occupant);
                                 }
                             }
-                        else if(PositionY-1>=0)
-                            {
-                            if(GameHandler.State.Player.Energy>=1)
-                                {
-                                GameHandler.State._Room.Layout[PositionX,PositionY-1].DigThrough();
-                                }
-                            }
+
                         break;
                         }
                 case 2:
@@ -101,18 +110,12 @@ namespace UGCli
                                 {
                                 Relocate(PositionX+1,PositionY-1);
                                 }
-                            else
+                            else if(GameHandler.State.Player.PositionX==PositionX+1&&PositionY-1==GameHandler.State.Player.PositionY)
                                 {
                                 GameHandler.ProcesCombat(this,GameHandler.State._Room.Layout[PositionX+1,PositionY-1].Occupant);
                                 }
                             }
-                        else if(PositionY-1>=0 && PositionX+1<GameHandler.State._Room.Widht)
-                            {
-                            if(GameHandler.State.Player.Energy>=1)
-                                {
-                                GameHandler.State._Room.Layout[PositionX+1,PositionY-1].DigThrough();
-                                }
-                            }
+
                         break;
                         }
                 case 3:
@@ -123,18 +126,12 @@ namespace UGCli
                                 {
                                 Relocate(PositionX+1,PositionY);
                                 }
-                            else
+                            else if(GameHandler.State.Player.PositionX==PositionX+1&&PositionY==GameHandler.State.Player.PositionY)
                                 {
                                 GameHandler.ProcesCombat(this,GameHandler.State._Room.Layout[PositionX+1,PositionY].Occupant);
                                 }
                             }
-                        else if(PositionX+1<GameHandler.State._Room.Widht)
-                            {
-                            if(GameHandler.State.Player.Energy>=1)
-                                {
-                                GameHandler.State._Room.Layout[PositionX+1,PositionY].DigThrough();
-                                }
-                            }
+
                         break;
                         }
                 case 4:
@@ -145,18 +142,12 @@ namespace UGCli
                                 {
                                 Relocate(PositionX+1,PositionY+1);
                                 }
-                            else
+                            else if(GameHandler.State.Player.PositionX==PositionX+1&&PositionY+1==GameHandler.State.Player.PositionY)
                                 {
                                 GameHandler.ProcesCombat(this,GameHandler.State._Room.Layout[PositionX+1,PositionY+1].Occupant);
                                 }
                             }
-                        else if(PositionX+1<GameHandler.State._Room.Widht &&PositionY+1<GameHandler.State._Room.Height)
-                            {
-                            if(GameHandler.State.Player.Energy>=1)
-                                {
-                                GameHandler.State._Room.Layout[PositionX+1,PositionY+1].DigThrough();
-                                }
-                            }
+
                         break;
                         }
                 case 5:
@@ -167,18 +158,12 @@ namespace UGCli
                                 {
                                 Relocate(PositionX,PositionY+1);
                                 }
-                            else
+                            else if(GameHandler.State.Player.PositionX==PositionX && PositionY+1==GameHandler.State.Player.PositionY)
                                 {
                                 GameHandler.ProcesCombat(this,GameHandler.State._Room.Layout[PositionX,PositionY+1].Occupant);
                                 }
                             }
-                        else if(PositionY+1<GameHandler.State._Room.Height)
-                            {
-                            if(GameHandler.State.Player.Energy>=1)
-                                {
-                                GameHandler.State._Room.Layout[PositionX,PositionY+1].DigThrough();
-                                }
-                            }
+
                         break;
                         }
                 case 6:
@@ -189,16 +174,9 @@ namespace UGCli
                                 {
                                 Relocate(PositionX-1,PositionY+1);
                                 }
-                            else 
+                            else if(GameHandler.State.Player.PositionX==PositionX-1&&PositionY+1==GameHandler.State.Player.PositionY)
                                 {
                                 GameHandler.ProcesCombat(this,GameHandler.State._Room.Layout[PositionX-1,PositionY+1].Occupant);
-                                }
-                            }
-                        else if(PositionY+1<GameHandler.State._Room.Height&&PositionX-1>=0)
-                            {
-                            if(GameHandler.State.Player.Energy>=1)
-                                {
-                                GameHandler.State._Room.Layout[PositionX-1,PositionY+1].DigThrough();
                                 }
                             }
                         break;
@@ -211,18 +189,12 @@ namespace UGCli
                                 {
                                 Relocate(PositionX-1,PositionY);
                                 }
-                            else
+                            else if(GameHandler.State.Player.PositionX==PositionX-1&&PositionY==GameHandler.State.Player.PositionY)
                                 {
                                 GameHandler.ProcesCombat(this,GameHandler.State._Room.Layout[PositionX-1,PositionY].Occupant);
                                 }
                             }
-                        else if(PositionX-1>=0)
-                            {
-                            if(GameHandler.State.Player.Energy>=1)
-                                {
-                                GameHandler.State._Room.Layout[PositionX-1,PositionY].DigThrough();
-                                }
-                            }
+
                         break;
                         }
                 case 8:
@@ -233,29 +205,16 @@ namespace UGCli
                                 {
                                 Relocate(PositionX-1,PositionY-1);
                                 }
-                            else
+                            else if(GameHandler.State.Player.PositionX==PositionX-1&&PositionY-1==GameHandler.State.Player.PositionY)
                                 {
                                 GameHandler.ProcesCombat(this,GameHandler.State._Room.Layout[PositionX-1,PositionY-1].Occupant);
-                                }
-                            }
-                        else if(PositionX-1>=0 && PositionY-1>=0)
-                            {
-                            if(GameHandler.State.Player.Energy>=1)
-                                {
-                                GameHandler.State._Room.Layout[PositionX-1,PositionY-1].DigThrough();
                                 }
                             }
                         break;
                         }
                 }
             FireOnMoveFinished(PositionX,PositionY,dir);
-            waitforstuff.Set();
             return 0;
             }
-        public void PickLoot(Item Loot)
-            {
-            Inventory.Add(Loot);
-            }
-
         }
     }

@@ -16,15 +16,15 @@ namespace UGCli
         /// <summary>
         /// Identifier of a perk, (DB stuff)
         /// </summary>
-        public static uint Id { get; private set; }
+        public int PerkID { get; private set; }
         /// <summary>
         /// name of a perk
         /// </summary>
-        public static string Name { get; private set; }
+        public string Name { get; private set; }
         /// <summary>
         /// verbal description of a perk
         /// </summary>
-        public static string Description { get; private set; }
+        public string Description { get; private set; }
         /// <summary>
         /// DB connection
         /// </summary>

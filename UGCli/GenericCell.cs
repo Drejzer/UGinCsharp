@@ -11,7 +11,7 @@ namespace UGCli
         public GenericCell(int k=0)
             {
             Type=TypeOfCell.Generic;
-            Id=k;
+            CellTypeID=k;
             IsEnterable=(k>0);
             switch(k)
                 {

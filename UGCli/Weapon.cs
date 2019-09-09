@@ -22,7 +22,7 @@ namespace UGCli
 
         public Weapon(Creature u,int i=0)
             {
-            Id=1000+i;
+            ItemID=1000+i;
             Name="Basic Attack";
             _baseDamage=1;
             _scaling=0.1;

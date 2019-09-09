@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
+using System.Data.Entity;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -45,6 +47,7 @@ namespace UGCli
             HPBar.Visibility=Visibility.Hidden;
             EBar.Visibility=Visibility.Hidden;
             InventoryPreview.Visibility=Visibility.Hidden;
+            SaveGameButton.Visibility=Visibility.Hidden;
             CommentBox.Text="...";
             string kappa = "\n";
             for (int i=0;i<50;++i)
@@ -61,15 +64,51 @@ namespace UGCli
             GameHandler.State.Player.OnEnergyChanged+=Player_OnEnergyChanged;
             GameHandler.State.Player.OnFinishedMove+=Player_OnFinishedMove;
             GameHandler.State.Player.OnStartingMove+=Player_OnStartingMove;
+            GameHandler.State.Player.OnLevelUP+=Player_OnLevelUP;
+            GameHandler.State.Player.OnKickedThebucket+=Endgame;
             Player_OnHealthChanged(this,EventArgs.Empty);
             Player_OnEnergyChanged(this,EventArgs.Empty);
             GameHandler.TurnPassed+=UpdateDisplay;
             InventoryPreview.ItemsSource=GameHandler.State.Player.Inventory;
             InventoryPreview.DisplayMemberPath="Name";
-            GameHandler.State.Player.Inventory.Add(new Weapon(null));
-            GameHandler.State.Player.Inventory.Add(new Weapon(null));
+            HPBar.Minimum=0;
+            EBar.Minimum=0;
+            HPBar.Maximum=GameHandler.State.Player.MaxHealth;
+            EBar.Maximum=GameHandler.State.Player.MaxEnergy;
+            HPBar.Value=GameHandler.State.Player.Health;
+            EBar.Value=GameHandler.State.Player.Energy;
             GameHandler.TurnPassed+=ProcesDisplayChanges;
             MakeVisible();
+            }
+
+        private void Endgame(object sender,CorpseArgs e)
+            {
+            WeaponBoostButton.Visibility=Visibility.Hidden;
+            XPBoostButton.Visibility=Visibility.Hidden;
+            EnergyRechargeButton.Visibility=Visibility.Hidden;
+            HealthRechargeButton.Visibility=Visibility.Hidden;
+            ItemUseButton.Visibility=Visibility.Hidden;
+            MovementLabel.Visibility=Visibility.Hidden;
+            MoveDownButton.Visibility=Visibility.Hidden;
+            MoveLeftButton.Visibility=Visibility.Hidden;
+            MoveLeftDownButton.Visibility=Visibility.Hidden;
+            MoveLeftUpBtton.Visibility=Visibility.Hidden;
+            MoveRightButton.Visibility=Visibility.Hidden;
+            MoveRightDownBtton.Visibility=Visibility.Hidden;
+            MoveRightUpBtton.Visibility=Visibility.Hidden;
+            MoveUpButton.Visibility=Visibility.Hidden;
+            StayButton.Visibility=Visibility.Hidden;
+            HPBar.Visibility=Visibility.Hidden;
+            EBar.Visibility=Visibility.Hidden;
+            InventoryPreview.Visibility=Visibility.Hidden;
+            SaveGameButton.Visibility=Visibility.Hidden;
+            int sc = GameHandler.State.Score;
+            foreach (Item a in GameHandler.State.Player.Inventory)
+                {
+                sc+=a.Value;
+                }
+            ExpositionDevice.Text="You have died after gathering a total of "+sc+" points.\n GOOD JOB\n care to try again?";
+            CommentBox.Text="You have died after gathering a total of "+sc+" points.\n GOOD JOB\n care to try again?";
             }
 
         private void ProcesDisplayChanges(object sender,EventArgs e)
@@ -89,19 +128,23 @@ namespace UGCli
 
         private void Player_OnEnergyChanged(object sender,EventArgs e)
             {
-            Eblack.Offset=GameHandler.State.Player.MaxEnergy/GameHandler.State.Player.Energy;
-            Egreen.Offset=Eblack.Offset;
+            EBar.Value=GameHandler.State.Player.Energy;
             }
 
         private void Player_OnHealthChanged(object sender,EventArgs e)
             {
-            HPblack.Offset=GameHandler.State.Player.MaxHealth/GameHandler.State.Player.Health;
-            HPred.Offset=HPblack.Offset;
+            HPBar.Value=GameHandler.State.Player.Health;
             }
 
         private void UpdateDisplay(object sender,EventArgs e)
             {
             ExpositionDevice.Text=GameHandler.State._Room.ToString();
+            InventoryPreview.ItemsSource=null;
+            InventoryPreview.ItemsSource=GameHandler.State.Player.Inventory;
+            EBar.Maximum=GameHandler.State.Player.MaxEnergy;
+            HPBar.Maximum=GameHandler.State.Player.MaxHealth;
+            EBar.Value=GameHandler.State.Player.Energy;
+            HPBar.Value=GameHandler.State.Player.Health;
             }
 
         private void LoadGameButton_Click(object sender,RoutedEventArgs e)
@@ -109,10 +152,6 @@ namespace UGCli
             GameHandler.LoadSavedGame();
             }
 
-        private void ShowStatusButton_Click(object sender,RoutedEventArgs e)
-            {
-
-            }
 
         private void NewGameButton_MouseEnter(object sender,MouseEventArgs e)
             {
@@ -146,6 +185,7 @@ namespace UGCli
             HPBar.Visibility=Visibility.Visible;
             EBar.Visibility=Visibility.Visible;
             InventoryPreview.Visibility=Visibility.Visible;
+            SaveGameButton.Visibility=Visibility.Visible;
             }
 
         private void HPBar_MouseEnter(object sender,MouseEventArgs e)
@@ -286,6 +326,72 @@ namespace UGCli
             }
 
         private void SelectedItem_SelectionChanged(object sender,SelectionChangedEventArgs e)
+            {
+            UpdateDisplay(this,e);
+            }
+
+        private void EnergyRechargeButton_Click(object sender,RoutedEventArgs e)
+            {
+            if(InventoryPreview.SelectedItem!=null)
+                {
+                GameHandler.State.Player.Inventory.Remove((Item)InventoryPreview.SelectedItem);
+                GameHandler.State.Player.ModEnergy(1);
+                UpdateDisplay(this,EventArgs.Empty);
+                }
+            GameHandler.ProcesTurn();
+            }
+
+        private void HealthRechargeButton_Click(object sender,RoutedEventArgs e)
+            {
+            if(InventoryPreview.SelectedItem!=null)
+                {
+                GameHandler.State.Player.Inventory.Remove((Item)InventoryPreview.SelectedItem);
+                GameHandler.State.Player.ModHealth(1);
+                UpdateDisplay(this,EventArgs.Empty);
+                }
+            GameHandler.ProcesTurn();
+            }
+
+        private void XPBoostButton_Click(object sender,RoutedEventArgs e)
+            {
+            if(InventoryPreview.SelectedItem!=null)
+                {
+                Item tmp = (Item)InventoryPreview.SelectedItem;
+                GameHandler.State.Player.GainExperience(tmp.Value/250);
+                GameHandler.State.Player.Inventory.Remove(tmp);
+                }
+            GameHandler.ProcesTurn();
+            }
+        private void Player_OnLevelUP(object sender,EventArgs e)
+            {
+            UpdateDisplay(this,EventArgs.Empty);
+            }
+
+        private void ItemUseButton_Click(object sender,RoutedEventArgs e)
+            {
+            object tmp = InventoryPreview.SelectedItem;
+            if(tmp!=null && tmp.GetType() == typeof(Module))
+                {
+                if(GameHandler.State.ActivatedItem!=null)
+                    {
+                GameHandler.State.ActivatedItem.Unequip(GameHandler.State.Player);
+                    }
+                GameHandler.State.Item_IsSlotted=true;
+                GameHandler.State.ActivatedItem=(Module)tmp;
+                GameHandler.State.ActivatedItem.Equip(GameHandler.State.Player);
+
+                }
+            }
+
+        private void SaveGameButton_Click(object sender,RoutedEventArgs e)
+            {
+            using(var db=new UG_Context())
+                {
+                db.Rooms.Add(GameHandler.State._Room);
+                }
+            }
+
+        private void SaveGameButton_MouseEnter(object sender,MouseEventArgs e)
             {
 
             }
