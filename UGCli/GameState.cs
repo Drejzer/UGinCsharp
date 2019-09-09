@@ -15,7 +15,7 @@ namespace UGCli
         public Hero Player;
         public int Score;
         public long TurnCount;
-        public ICollection<Creature> Actors;
+        public List<Creature> Actors;
         //public (bool IsSlotted,Item Fuel, int )
 
         public GameState()
@@ -27,6 +27,7 @@ namespace UGCli
             Player.OnStartingMove+=PlayerStartedMove;
             Player.OnFinishedMove+=PlayerFinishedMove;
             Player.OnLevelUP+=Player_Levelled;
+            Actors=new List<Creature>();
             }
 
         private void Player_Levelled(object sender,EventArgs e)

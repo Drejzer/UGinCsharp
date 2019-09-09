@@ -10,13 +10,17 @@ namespace UGCli
         {
         protected double _UntillScalingUpgrade;
         protected int _UntillBaseDamageUpgrade;
+        protected int _UntilSpeedUpgrade;
 
 
-        public Pickaxe():base()
+        public Pickaxe(Hero p):base(p)
             {
+            Id+=1000;
             Name="Pickaxe";
             _scaling=1;
             _baseDamage=3;
+            _UntillScalingUpgrade=_scaling;
+            _UntillBaseDamageUpgrade=_baseDamage;
 
             }
 

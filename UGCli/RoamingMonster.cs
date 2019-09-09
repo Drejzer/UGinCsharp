@@ -8,6 +8,27 @@ namespace UGCli
     {
     class RoamingMonster:Creature,IMobile
         {
+        public RoamingMonster()
+            {
+            int tmp = 8;
+            Strenght=1+GameHandler.roller.Next()%tmp;
+            tmp-=(Strenght-1);
+            Vitality=1+GameHandler.roller.Next()%tmp;
+            tmp-=(Vitality-1);
+            Agility=1+GameHandler.roller.Next()%tmp;
+            tmp-=(Agility-1);
+            Magic=1+GameHandler.roller.Next()%tmp;
+            _baseHealth=(10+Vitality);
+            _baseEnergy=5+Magic;
+            MaxEnergy=_baseEnergy;
+            MaxHealth=_baseHealth;
+            Health=MaxHealth;
+            Energy=MaxEnergy;
+            weapon=new Weapon(this);
+            Representation='r';
+            Loot=weapon;
+            }
+
         public override int Action()
             {
             return Move(GameHandler.roller.Next(1,8));
@@ -15,6 +36,7 @@ namespace UGCli
 
         public int Move(int dir)
             {
+            FireOnMoveStarted(PositionX,PositionY,dir);
             switch(dir)
                 {
                 case 1:
@@ -106,6 +128,7 @@ namespace UGCli
                         break;
                         }
                 }
+            FireOnMoveFinished(PositionX,PositionY,dir);
             return 0;
             }
         }

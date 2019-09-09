@@ -15,13 +15,12 @@ namespace UGCli
         /// <summary>
         /// Damage dealt by a succesful attack, depends on the Strenght of a creature
         /// </summary>
-        public int Damage { get; private set; }
         protected int _baseDamage;
         protected double _scaling;
         protected int _speed;
         public Creature User;
 
-        public Weapon(int i=0)
+        public Weapon(Creature u,int i=0)
             {
             Id=1000+i;
             Name="Basic Attack";
@@ -29,31 +28,16 @@ namespace UGCli
             _scaling=0.1;
             _speed=700;
             Value=0;
+            User=u;
             }
         
-        public void Equip(Creature a)
-            {
-            User=a;
-            a.weapon=this;
-            Damage=_baseDamage+(int)((double)(a.Strenght)*_scaling);
-            }
-        public void Unequip(Creature a)
-            {
-            if(a.weapon.Id==1)
-                {
-                return;
-                }
-            else if(a.weapon==this)
-                {
-                }
-            }
-        public int GetAttackTime()
+        public int GetSpeed()
             {
             return _speed-(User.Strenght);
             }
-        public int ResolveAttack()
+        public int ResolveDamage()
             {
-            throw new NotImplementedException();
+            return _baseDamage+(int)(User.Strenght*_scaling);
             }
         public void GenerateFromDB()
             {

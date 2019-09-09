@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,12 +16,14 @@ using System.Windows.Shapes;
 
 namespace UGCli
     {
+    
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow:Window
         {
-        
+
         public MainWindow()
             {
             InitializeComponent();
@@ -43,14 +46,10 @@ namespace UGCli
             EBar.Visibility=Visibility.Hidden;
             InventoryPreview.Visibility=Visibility.Hidden;
             CommentBox.Text="...";
-            string kappa = "";
-            for (int i=0;i<62;++i)
+            string kappa = "\n";
+            for (int i=0;i<50;++i)
                 {
-                for(int j=0;j<200;++j)
-                    {
-                    kappa+='/';
-                    }
-                kappa+='\n';
+                kappa+="\\"+new string('/',49)+'\n';
                 }
             ExpositionDevice.Text=kappa;
             }
@@ -61,15 +60,21 @@ namespace UGCli
             GameHandler.State.Player.OnHealthChanged+=Player_OnHealthChanged;
             GameHandler.State.Player.OnEnergyChanged+=Player_OnEnergyChanged;
             GameHandler.State.Player.OnFinishedMove+=Player_OnFinishedMove;
-            GameHandler.State.Player.OnStartingMove+=Player_OnStartingMove; ;
+            GameHandler.State.Player.OnStartingMove+=Player_OnStartingMove;
             Player_OnHealthChanged(this,EventArgs.Empty);
             Player_OnEnergyChanged(this,EventArgs.Empty);
             GameHandler.TurnPassed+=UpdateDisplay;
             InventoryPreview.ItemsSource=GameHandler.State.Player.Inventory;
-            InventoryPreview.DisplayMemberPath=Name;
-            GameHandler.State.Player.Inventory.Add(new Weapon());
-            Task task = new Task(new Action(GameHandler.Gameplay));
+            InventoryPreview.DisplayMemberPath="Name";
+            GameHandler.State.Player.Inventory.Add(new Weapon(null));
+            GameHandler.State.Player.Inventory.Add(new Weapon(null));
+            GameHandler.TurnPassed+=ProcesDisplayChanges;
             MakeVisible();
+            }
+
+        private void ProcesDisplayChanges(object sender,EventArgs e)
+            {
+            UpdateDisplay(sender,e);
             }
 
         private void Player_OnStartingMove(object sender,MoveDirData e)

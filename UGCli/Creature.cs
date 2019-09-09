@@ -11,6 +11,7 @@ namespace UGCli
     public abstract class Creature
         {
         public event EventHandler OnHealthChanged, OnLevelUP, OnRecalc,OnEnergyChanged;
+        public event EventHandler<MoveDirData> OnStartingMove, OnFinishedMove;
 
         /// <summary>
         /// Name of the Creture
@@ -46,8 +47,7 @@ namespace UGCli
 
         protected int _baseAtack;
         protected int _baseDefense;
-        public int AtkBonus { get; set; }
-        public int DefBonus { get; set; }
+        public int CombatBonus { get; set; }
         public int MaxHealth { get; protected set; }
         public int Health { get; protected set; }
         public int MaxEnergy { get; protected set; }
@@ -132,9 +132,22 @@ namespace UGCli
             PositionY=y;
             }
 
-        protected void FireHealthCHanged()
+        protected void FireHealthChanged()
             {
             OnHealthChanged(this,EventArgs.Empty);
             }
+        protected void FireEnergyChanged()
+            {
+            OnEnergyChanged(this,EventArgs.Empty);
+            }
+protected void FireOnMoveStarted(int PositionX,int PositionY,int dir)
+            {
+            OnStartingMove(this,new MoveDirData(PositionX,PositionY,dir));
+            }
+protected void FireOnMoveFinished(int PositionX,int  PositionY, int dir)
+            {
+            OnFinishedMove(this,new MoveDirData(PositionX,PositionY,dir));
+            }
+
         }
     }

@@ -14,7 +14,6 @@ namespace UGCli
     public class Hero:Creature,IMobile
         {
         protected ManualResetEventSlim waitforstuff = new ManualResetEventSlim(false);
-        public event EventHandler<MoveDirData> OnStartingMove, OnFinishedMove;
 
         public List<Item> Inventory;
 
@@ -35,7 +34,7 @@ namespace UGCli
             MaxHealth=_baseHealth;
             Health=MaxHealth;
             Energy=MaxEnergy;
-            weapon=new Pickaxe();
+            weapon=new Pickaxe(this);
             Representation='@';
             }
 
@@ -51,7 +50,7 @@ namespace UGCli
 
         public int Move(int dir)
             {
-            OnStartingMove(this,new MoveDirData(PositionX,PositionY,dir));
+            FireOnMoveStarted(PositionX,PositionY,dir);
             switch(dir)
                 {
                 case 1:
@@ -183,7 +182,7 @@ namespace UGCli
                         break;
                         }
                 }
-            OnFinishedMove(this,new MoveDirData(PositionX,PositionY,dir));
+            FireOnMoveFinished(PositionX,PositionY,dir);
             waitforstuff.Set();
             return 0;
             }

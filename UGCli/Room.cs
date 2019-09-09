@@ -40,36 +40,36 @@ namespace UGCli
         /// </summary>
         public void GenerateRoom()
             {
-            int[,] tmp=new int[Widht,Height],tmp2;
-            bool heroplaced=false;
+            int[,] tmp = new int[Widht,Height], tmp2;
+            bool heroplaced = false;
             int Neighbourhood;
-            for(int i=0,j;i<Widht;++i)
+            for(int i = 0, j;i<Widht;++i)
                 {
                 for(j=0;j<Height;++j)
                     {
-                    if(i==0 || j==0 ||j==Height-1 || i==Widht-1)
+                    if(i==0||j==0||j==Height-1||i==Widht-1)
                         {
                         tmp[i,j]=0;
                         continue;
                         }
-                   tmp[i,j]=(GameHandler.roller.Next(0,99)>39)?1:0;
+                    tmp[i,j]=(GameHandler.roller.Next(0,99)>39) ? 1 : 0;
                     }
                 }
-            for(int obr=0;obr<4;++obr)
+            for(int obr = 0;obr<4;++obr)
                 {
                 tmp2=tmp;
-                for(int i = 1,j;i<Widht;++i)
+                for(int i = 1, j;i<Widht;++i)
                     {
-                    for(j = 0;j<Height;++j)
+                    for(j=0;j<Height;++j)
                         {
                         Neighbourhood=CountSurroundingWalls(tmp2,i,j,Widht,Height);
                         if(tmp2[i,j]==0)
                             {
-                            if (Neighbourhood>=4)
+                            if(Neighbourhood>=4)
                                 {
                                 tmp[i,j]=0;
                                 }
-                            else if (Neighbourhood<2)
+                            else if(Neighbourhood<2)
                                 {
                                 tmp[i,j]=1;
                                 }
@@ -93,25 +93,39 @@ namespace UGCli
                 for(j=0;j<Widht;++j)
                     {
                     Layout[j,i]=new CellInstance(j,i,this,0,tmp[j,i]);
-                    if(i>0 && j>0 && j+1<Widht && i+1<Height && !heroplaced && Layout[j,i].cellType.IsEnterable)
+                    if(i>0&&j>0&&j+1<Widht&&i+1<Height&&!heroplaced&&Layout[j,i].cellType.IsEnterable)
                         {
-                        if(tmp[j-1,i-1]==1 &&tmp[j-1,i]==1&&tmp[j-1,i+1]==1&&tmp[j,i+1]==1&&tmp[j+1,i+1]==1&&tmp[j+1,i]==1&&tmp[j+1,i-1]==1&&tmp[j,i-1]==1)
+                        if(tmp[j-1,i-1]==1&&tmp[j-1,i]==1&&tmp[j-1,i+1]==1&&tmp[j,i+1]==1&&tmp[j+1,i+1]==1&&tmp[j+1,i]==1&&tmp[j+1,i-1]==1&&tmp[j,i-1]==1)
                             {
                             Layout[j,i].IsOccupied=true;
                             Layout[j,i].Occupant=GameHandler.State.Player;
                             heroplaced=true;
                             GameHandler.State.Player.Relocate(j,i);
+                            RoamingMonster kappa = new RoamingMonster();
+                            GameHandler.State.Actors.Add(kappa);
+                            kappa.Relocate(j-1,i-1);
+                            Layout[j-1,i-1].IsOccupied=true;
+                            Layout[j-1,i-1].Occupant=kappa;
                             }
                         }
                     }
                 }
+            }
+
+        private void SpawnMonsters(ref int[,] tab,int W,int H)
+            {
 
             }
 
-        private int CountSurroundingWalls(int[,] a,int x,int y, int W, int H)
+        private void MarkMonsterTerytories(ref int[,] tab,int W,int H,int x,int y)
             {
-            int valu=0;
-            if(x-1<0 || y-1<0 ||x-1>=W||y-1>=H)
+
+            }
+
+        private int CountSurroundingWalls(int[,] a,int x,int y,int W,int H)
+            {
+            int valu = 0;
+            if(x-1<0||y-1<0||x-1>=W||y-1>=H)
                 {
                 valu++;
                 }
@@ -192,25 +206,25 @@ namespace UGCli
 
         public override string ToString()
             {
-            string Displayed= new string('—',Widht);
+            string Displayed = new string('—',Widht);
             Displayed="+"+Displayed+"+\n";
-            for(int i = 0,j;i<Height;++i)
+            for(int i = 0, j;i<Height;++i)
                 {
                 Displayed+="|";
                 for(j=0;j<Widht;++j)
                     {
-                    if (Layout[j,i].IsOccupied)
+                    if(Layout[j,i].IsOccupied)
                         {
                         Displayed+=Layout[j,i].Occupant.Representation.ToString();
                         }
                     else
                         {
-                    Displayed+=Layout[j,i].cellType.Representation.ToString();
+                        Displayed+=Layout[j,i].cellType.Representation.ToString();
                         }
                     }
                 Displayed+="|\n";
                 }
-            return Displayed+"+"+new string('—',Widht)+"+"; 
+            return Displayed+"+"+new string('—',Widht)+"+";
             }
         }
     }
