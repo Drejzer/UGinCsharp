@@ -24,16 +24,25 @@ namespace UGCli
             MaxHealth=_baseHealth;
             Health=MaxHealth;
             Energy=MaxEnergy;
-            weapon=new Weapon(this);
+            weapon=new Weapon();
             Representation='r';
             Loot=weapon;
             }
 
+        /// <summary>
+        /// this enemy moves around randomly
+        /// </summary>
+        /// <returns></returns>
         public override int Action()
             {
             return Move(GameHandler.roller.Next(1,8));
             }
 
+        /// <summary>
+        /// implements Imobile interface
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <returns></returns>
         public int Move(int dir)
             {
             FireOnMoveStarted(PositionX,PositionY,dir);

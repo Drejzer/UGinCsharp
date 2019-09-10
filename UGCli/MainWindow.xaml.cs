@@ -385,10 +385,12 @@ namespace UGCli
 
         private void SaveGameButton_Click(object sender,RoutedEventArgs e)
             {
-            using(var db=new UG_Context())
+            /*using(var db=new UG_Context())
                 {
-                db.Rooms.Add(GameHandler.State._Room);
+                var a = new Gem() { ItemID=11,Name="Pebble",Value=0 }; 
+                db.Items.Add(a);
                 }
+                */
             }
 
         private void SaveGameButton_MouseEnter(object sender,MouseEventArgs e)

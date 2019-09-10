@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data.Entity.ModelConfiguration;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace UGCli
     {
@@ -17,12 +19,13 @@ namespace UGCli
     /// <summary>
     /// Name of the Creture
     /// </summary>
-    public string Name { get; protected set; }
-    public int CreatureID{ get; protected set; }
+    public string Name { get; set; }
+        [Key]
+        public int CreatureID{ get; set; }
         /// <summary>
         /// Designates power of a creature, Affects Health and Enegry
         /// </summary>
-        public int Level { get; protected set; }
+        public int Level { get; set; }
         protected int _xpToNextLvl { get; set; }
         /// <summary>
         /// Influences Damage and carrying capcity (TODO)
@@ -31,37 +34,58 @@ namespace UGCli
         /// <summary>
         /// To-hit, Defense, order of actions
         /// </summary>
-        public int Agility { get; protected set; }
+        public int Agility { get; set; }
         /// <summary>
         /// Energy Reserves
         /// </summary>
-        public int Magic { get; protected set; }
+        public int Magic { get; set; }
         /// <summary>
         /// Health and general surivability
         /// </summary>
-        public int Vitality { get; protected set; }
+        public int Vitality { get; set; }
         protected int _baseHealth { get; set; }
         protected int _baseEnergy { get; set; }
         /// <summary>
         /// What character is used to display this creature
         /// </summary>
-        public char Representation { get; protected set; }
+        public char Representation { get; set; }
 
         protected int _baseAtack { get; set; }
         protected int _baseDefense { get; set; }
+        /// <summary>
+        /// bonuses to combat effectivenes
+        /// </summary>
         public int CombatBonus { get; set; }
-        public int MaxHealth { get; protected set; }
-        public int Health { get; protected set; }
-        public int MaxEnergy { get; protected set; }
-        public int Energy { get; protected set; }
-        public double SpeedBonus { get; protected set; }
+        /// <summary>
+        /// Maximum health capacit of a  ceature, baed on level and Vitality
+        /// </summary>
+        public int MaxHealth { get; set; }
+        /// <summary>
+        /// curent health of a creature
+        /// </summary>
+        public int Health { get; set; }
+        public int MaxEnergy { get; set; }
+        public int Energy { get; set; }
+        /// <summary>
+        /// obsolete
+        /// </summary>
+        public double SpeedBonus { get; set; }
+        /// <summary>
+        /// bonuses to maximum energy capacity
+        /// </summary>
         public int EnergyBonus { get; set; }
         public int HealthBonus { get; set; }
         /// <summary>
-        /// The coordinates of a creature within a Room
+        /// The X coorinate of a creature within a Room
         /// </summary>
-        public int PositionX { get; protected set; }
-        public int PositionY { get; protected set; }
+        public int PositionX { get; set; }
+        /// <summary>
+        /// The Y coordinate of a creature within a Room
+        /// </summary>
+        public int PositionY { get; set; }
+        /// <summary>
+        /// weapon used by the creature.
+        /// </summary>
         public Weapon weapon { get; set; }
         /// <summary>
         /// Holds loot dropped at death
@@ -112,6 +136,9 @@ namespace UGCli
             ModEnergy(MaxEnergy-prevE);
             ModHealth(MaxHealth-prevHP);
             }
+        /// <summary>
+        /// raises the power of the creature
+        /// </summary>
         public virtual void LevelUp()
             {
             if(_xpToNextLvl>0)
@@ -127,6 +154,11 @@ namespace UGCli
 
             }
 
+        /// <summary>
+        /// changes teh location of the creature
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public void Relocate(int x,int y)
             {
             PositionX=x;
@@ -149,6 +181,9 @@ namespace UGCli
             {
             OnFinishedMove(this,new MoveDirData(PositionX,PositionY,dir));
             }
+        /// <summary>
+        /// used to signal that a creature died(necessary when enemies initiate combat)
+        /// </summary>
         public void FireKicktehBucket()
             {
             OnKickedThebucket(this,new CorpseArgs(this));

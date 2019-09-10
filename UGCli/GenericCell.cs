@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace UGCli
-    {
+    {/// <summary>
+    /// most common tye of cells, walls and empty spaces
+    /// </summary>
     class GenericCell:CellType
-        {
+        {        
         public GenericCell(int k=0)
             {
             Type=TypeOfCell.Generic;

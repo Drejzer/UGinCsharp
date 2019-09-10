@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity.Core;
 
 namespace UGCli
     {
@@ -12,11 +13,18 @@ namespace UGCli
     [Serializable]
     public abstract class Item
         {
-        public int ItemID { get; protected set; }
-        public String Name { get; protected set; }
+        /// <summary>
+        /// identifier of the item
+        /// </summary>
+        public int ItemID { get;  set; }
+        /// <summary>
+        /// name of the item
+        /// </summary>
+        public String Name { get; set; }
         /// <summary>
         /// Value in points
         /// </summary>
-        public int Value { get; protected set; }
+        public int Value { get; set; }
+        public Creature Owner { get; set; }
         }
     }

@@ -8,15 +8,37 @@ using System.Data.Entity;
 
 namespace UGCli
     {
+    /// <summary>
+    /// Holds information about a game session
+    /// </summary>
     public class GameState: IDBGeneratable
         {
         public int GameStateID { get; set; }
+        /// <summary>
+        /// how many rooms were genereated for this session
+        /// </summary>
         public int Depth { get; set; }
+        /// <summary>
+        /// Current rooom
+        /// </summary>
         public Room _Room { get; set; }
+        /// <summary>
+        /// Player caracter in this session
+        /// </summary>
         public Hero Player { get; set; }
+        /// <summary>
+        /// points gathered by the player
+        /// </summary>
         public int Score { get; set; }
+        /// <summary>
+        /// how amn turns passed (probably OBSOLETE)
+        /// </summary>
         public long TurnCount { get; set; }
+        /// <summary>
+        /// enemies in current room
+        /// </summary>
         public List<Creature> Actors { get; set; }
+
         public Module ActivatedItem { get; set; }
         public Weapon WeaponBoost { get; set; }
         public bool Weapon_IsSloted { get; set; }
@@ -36,7 +58,9 @@ public GameState()
             {
             Score+=450;
             }
-
+        /// <summary>
+        /// Generates new room for the current sesion
+        /// </summary>
         public void GoDeeper()
             {
             Score+=1000*Depth;

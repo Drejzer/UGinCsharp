@@ -18,11 +18,15 @@ namespace UGCli
         /// <summary>
         /// Describes the width of the room
         /// </summary>
-        public int Widht { get; private set; }
+        public int Width { get; set; }
         /// <summary>
         /// Describes the height of the room
         /// </summary>
-        public int Height { get; private set; }
+        public int Height { get;  set; }
+        /// <summary>
+        /// for database stuff
+        /// </summary>
+        public List<CellInstance> cellInstances { get; set; }
         /// <summary>
         /// holds the layout of the room<br/>
         /// </summary>
@@ -32,23 +36,24 @@ namespace UGCli
         /// </summary>
         public Room()
             {
-            Widht=GameHandler.roller.Next(75,150);
+            Width=GameHandler.roller.Next(75,150);
             Height=GameHandler.roller.Next(75,150);
-            Layout=new CellInstance[Widht,Height];
+            Layout=new CellInstance[Width,Height];
+            cellInstances=new List<CellInstance>();
             }
         /// <summary>
-        /// procedurally generates the room
+        /// procedurally generates the room, places teh player and enemies
         /// </summary>
         public void GenerateRoom()
             {
-            int[,] tmp = new int[Widht,Height], tmp2;
+            int[,] tmp = new int[Width,Height], tmp2;
             bool heroplaced = false;
             int Neighbourhood;
-            for(int i = 0, j;i<Widht;++i)
+            for(int i = 0, j;i<Width;++i)
                 {
                 for(j=0;j<Height;++j)
                     {
-                    if(i==0||j==0||j==Height-1||i==Widht-1)
+                    if(i==0||j==0||j==Height-1||i==Width-1)
                         {
                         tmp[i,j]=0;
                         continue;
@@ -59,11 +64,11 @@ namespace UGCli
             for(int obr = 0;obr<4;++obr)
                 {
                 tmp2=tmp;
-                for(int i = 1, j;i<Widht;++i)
+                for(int i = 1, j;i<Width;++i)
                     {
                     for(j=0;j<Height;++j)
                         {
-                        Neighbourhood=CountSurroundingWalls(tmp2,i,j,Widht,Height);
+                        Neighbourhood=CountSurroundingWalls(tmp2,i,j,Width,Height);
                         if(tmp2[i,j]==0)
                             {
                             if(Neighbourhood>=4)
@@ -91,10 +96,11 @@ namespace UGCli
                 }
             for(int i = 0, j;i<Height;++i)
                 {
-                for(j=0;j<Widht;++j)
+                for(j=0;j<Width;++j)
                     {
                     Layout[j,i]=new CellInstance(j,i,this,0,tmp[j,i]);
-                    if(i>0&&j>0&&j+1<Widht&&i+1<Height&&!heroplaced&&Layout[j,i].cellType.IsEnterable)
+                    cellInstances.Add(Layout[j,i]);
+                    if(i>0&&j>0&&j+1<Width&&i+1<Height&&!heroplaced&&Layout[j,i].cellType.IsEnterable)
                         {
                         if(tmp[j-1,i-1]==1&&tmp[j-1,i]==1&&tmp[j-1,i+1]==1&&tmp[j,i+1]==1&&tmp[j+1,i+1]==1&&tmp[j+1,i]==1&&tmp[j+1,i-1]==1&&tmp[j,i-1]==1)
                             {
@@ -104,7 +110,7 @@ namespace UGCli
                             GameHandler.State.Player.Relocate(j,i);
                             }
                         }
-                    else if(i>0&&j>0&&j+1<Widht&&i+1<Height&&Layout[j,i].cellType.IsEnterable)
+                    else if(i>0&&j>0&&j+1<Width&&i+1<Height&&Layout[j,i].cellType.IsEnterable)
                         {
                         Creature kappa;
                         int seed = GameHandler.roller.Next(1,100);
@@ -128,7 +134,12 @@ namespace UGCli
                     }
                 }
             }
-
+        /// <summary>
+        /// was supposed to be the logic of placing monsters, obsolete
+        /// </summary>
+        /// <param name="tab"></param>
+        /// <param name="W"></param>
+        /// <param name="H"></param>
         private void SpawnMonsters(ref int[,] tab,int W,int H)
             {
 
@@ -220,15 +231,18 @@ namespace UGCli
             {
             throw new NotImplementedException();
             }
-
+        /// <summary>
+        /// returns the Room layout as a string
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
             {
-            string Displayed = new string('—',Widht);
+            string Displayed = new string('—',Width);
             Displayed="+"+Displayed+"+\n";
             for(int i = 0, j;i<Height;++i)
                 {
                 Displayed+="|";
-                for(j=0;j<Widht;++j)
+                for(j=0;j<Width;++j)
                     {
                     if(Layout[j,i].IsOccupied)
                         {
@@ -241,7 +255,7 @@ namespace UGCli
                     }
                 Displayed+="|\n";
                 }
-            return Displayed+"+"+new string('—',Widht)+"+";
+            return Displayed+"+"+new string('—',Width)+"+";
             }
         }
     }

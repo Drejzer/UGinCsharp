@@ -18,9 +18,8 @@ namespace UGCli
         protected int _baseDamage;
         protected double _scaling;
         protected int _speed;
-        public Creature User;
 
-        public Weapon(Creature u,int i=0)
+        public Weapon(int i=0)
             {
             ItemID=1000+i;
             Name="Basic Attack";
@@ -28,17 +27,27 @@ namespace UGCli
             _scaling=0.1;
             _speed=700;
             Value=0;
-            User=u;
             }
         
+        /// <summary>
+        /// obsolete
+        /// </summary>
+        /// <returns></returns>
         public int GetSpeed()
             {
-            return _speed-(User.Strenght);
+            return _speed;
             }
-        public int ResolveDamage()
+        /// <summary>
+        /// Returns amount of damage the weapon is capable of dealing, based on user's and weapon's stats
+        /// </summary>
+        /// <returns></returns>
+        public int ResolveDamage(Creature User)
             {
             return _baseDamage+(int)(User.Strenght*_scaling);
             }
+        /// <summary>
+        /// TBD: Loading Weapon from database
+        /// </summary>
         public void GenerateFromDB()
             {
 #warning finish dat

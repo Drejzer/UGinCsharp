@@ -13,9 +13,15 @@ namespace UGCli
     [Serializable]
     public class Hero:Creature,IMobile
         {
+        /// <summary>
+        /// obsolete
+        /// </summary>
         protected ManualResetEventSlim waitforstuff = new ManualResetEventSlim(false);
 
-        public List<Item> Inventory;
+        /// <summary>
+        /// Holds items gainded during gameplay
+        /// </summary>
+        public List<Item> Inventory { get; set; }
 
         public Hero()
             {
@@ -36,10 +42,14 @@ namespace UGCli
             MaxHealth=_baseHealth;
             Health=MaxHealth;
             Energy=MaxEnergy;
-            weapon=new Pickaxe(this);
+            weapon=new Pickaxe();
             Representation='@';
             }
 
+        /// <summary>
+        /// Adds XP t ocharacter's total, allowing for a levelup
+        /// </summary>
+        /// <param name="xp"></param>
         public void GainExperience(int xp)
             {
             _xpToNextLvl-=xp;
@@ -48,6 +58,10 @@ namespace UGCli
                 LevelUp();
                 }
             }
+        /// <summary>
+        /// Allows to modify player's HP<br/> Ends game if HP drops to or below 0
+        /// </summary>
+        /// <param name="a"></param>
         public override void ModHealth(int a)
             {
             base.ModHealth(a);
@@ -66,6 +80,11 @@ namespace UGCli
             return 0;
             }
 
+        /// <summary>
+        /// Attempts to change player's position<br/> If the space is empty, Moves teh cahracter<br/> if occupied by an enemy, initiates combat<br/> if the field is a wall, attempts to destroy it
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <seealso cref="GameHandler.ProcesCombat(Creature, Creature)"/>
         public int Move(int dir)
             {
             FireOnMoveStarted(PositionX,PositionY,dir);
@@ -95,7 +114,7 @@ namespace UGCli
                         }
                 case 2:
                         {
-                        if(PositionY-1>=0&&PositionX+1<GameHandler.State._Room.Widht&&GameHandler.State._Room.Layout[PositionX+1,PositionY-1].cellType.IsEnterable)
+                        if(PositionY-1>=0&&PositionX+1<GameHandler.State._Room.Width&&GameHandler.State._Room.Layout[PositionX+1,PositionY-1].cellType.IsEnterable)
                             {
                             if(!GameHandler.State._Room.Layout[PositionX+1,PositionY-1].IsOccupied)
                                 {
@@ -106,7 +125,7 @@ namespace UGCli
                                 GameHandler.ProcesCombat(this,GameHandler.State._Room.Layout[PositionX+1,PositionY-1].Occupant);
                                 }
                             }
-                        else if(PositionY-1>=0 && PositionX+1<GameHandler.State._Room.Widht)
+                        else if(PositionY-1>=0 && PositionX+1<GameHandler.State._Room.Width)
                             {
                             if(GameHandler.State.Player.Energy>=1)
                                 {
@@ -117,7 +136,7 @@ namespace UGCli
                         }
                 case 3:
                         {
-                        if(PositionX+1<GameHandler.State._Room.Widht&&GameHandler.State._Room.Layout[PositionX+1,PositionY].cellType.IsEnterable)
+                        if(PositionX+1<GameHandler.State._Room.Width&&GameHandler.State._Room.Layout[PositionX+1,PositionY].cellType.IsEnterable)
                             {
                             if(!GameHandler.State._Room.Layout[PositionX+1,PositionY].IsOccupied)
                                 {
@@ -128,7 +147,7 @@ namespace UGCli
                                 GameHandler.ProcesCombat(this,GameHandler.State._Room.Layout[PositionX+1,PositionY].Occupant);
                                 }
                             }
-                        else if(PositionX+1<GameHandler.State._Room.Widht)
+                        else if(PositionX+1<GameHandler.State._Room.Width)
                             {
                             if(GameHandler.State.Player.Energy>=1)
                                 {
@@ -139,7 +158,7 @@ namespace UGCli
                         }
                 case 4:
                         {
-                        if(PositionX+1<GameHandler.State._Room.Widht&&PositionY+1<GameHandler.State._Room.Height&&GameHandler.State._Room.Layout[PositionX+1,PositionY+1].cellType.IsEnterable)
+                        if(PositionX+1<GameHandler.State._Room.Width&&PositionY+1<GameHandler.State._Room.Height&&GameHandler.State._Room.Layout[PositionX+1,PositionY+1].cellType.IsEnterable)
                             {
                             if(!GameHandler.State._Room.Layout[PositionX+1,PositionY+1].IsOccupied)
                                 {
@@ -150,7 +169,7 @@ namespace UGCli
                                 GameHandler.ProcesCombat(this,GameHandler.State._Room.Layout[PositionX+1,PositionY+1].Occupant);
                                 }
                             }
-                        else if(PositionX+1<GameHandler.State._Room.Widht &&PositionY+1<GameHandler.State._Room.Height)
+                        else if(PositionX+1<GameHandler.State._Room.Width &&PositionY+1<GameHandler.State._Room.Height)
                             {
                             if(GameHandler.State.Player.Energy>=1)
                                 {
@@ -252,6 +271,10 @@ namespace UGCli
             waitforstuff.Set();
             return 0;
             }
+        /// <summary>
+        /// adds items to the inventory
+        /// </summary>
+        /// <param name="Loot"></param>
         public void PickLoot(Item Loot)
             {
             Inventory.Add(Loot);

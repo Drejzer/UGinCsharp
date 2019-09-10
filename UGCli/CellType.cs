@@ -16,12 +16,18 @@ namespace UGCli
         /// <summary>
         /// ID, used by database
         /// </summary>
-        public int CellTypeID { get; protected set; }
+        public int CellTypeID { get; set; }
         /// <summary>
         /// Determines type of the cell
         /// </summary>
-        public TypeOfCell Type { get; protected set; }
+        public TypeOfCell Type { get; set; }
+        /// <summary>
+        /// Holds information if the cell can be entered
+        /// </summary>
         public bool IsEnterable { get; set; }
+        /// <summary>
+        /// the way the cell is displayed on map
+        /// </summary>
         public char Representation { get; set; }
         /// <summary>
         /// Instances of a tile (DBstufff)

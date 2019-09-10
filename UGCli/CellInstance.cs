@@ -13,20 +13,24 @@ namespace UGCli
         /// <summary>
         /// Posiotion of a Tile instance within a Room
         /// </summary>
-        public (int X, int Y) Pos;
-        public CellType cellType;
+        public int PosX { get; set; }
+        public int PosY { get; set; }
+        /// <summary>
+        /// Type of cell represented by this particular instance
+        /// </summary>
+        public CellType cellType { get; set; }
         /// <summary>
         /// reference to a room, in which this tile exists
         /// </summary>
-        public Room room;
+        public Room room { get; set; }
         /// <summary>
         /// informatoin about the presence of a creature in this tile
         /// </summary>
-        public bool IsOccupied;
+        public bool IsOccupied { get; set; }
         /// <summary>
         /// reference to a creature occupying the cell
         /// </summary>
-        public Creature Occupant;
+        public Creature Occupant { get; set; }
         public CellInstance()
             {
             cellType=new GenericCell();
@@ -34,8 +38,8 @@ namespace UGCli
 
         public CellInstance(int X, int Y,Room _R, TypeOfCell t=0,int r=0)
             {
-            Pos.X=X;
-            Pos.Y=Y;
+            PosX=X;
+            PosY=Y;
             room=_R;
             IsOccupied=false;
             Occupant=null;
@@ -54,6 +58,9 @@ namespace UGCli
                 }
             
             }
+        /// <summary>
+        /// Turns a wall into passable space
+        /// </summary>
         public void DigThrough()
             {
             GameHandler.State.Player.ModEnergy(-1);

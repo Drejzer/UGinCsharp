@@ -26,11 +26,14 @@ namespace UGCli
             MaxHealth=_baseHealth;
             Health=MaxHealth;
             Energy=MaxEnergy;
-            weapon=new Weapon(this);
+            weapon=new Weapon();
             Representation='e';
             }
 
-
+        /// <summary>
+        /// This Enemy tries to move into Player's space, and initiate combat
+        /// </summary>
+        /// <returns></returns>
         public override int Action()
             {
             if(PositionX>GameHandler.State.Player.PositionX)
@@ -104,7 +107,7 @@ namespace UGCli
                         }
                 case 2:
                         {
-                        if(PositionY-1>=0&&PositionX+1<GameHandler.State._Room.Widht&&GameHandler.State._Room.Layout[PositionX+1,PositionY-1].cellType.IsEnterable)
+                        if(PositionY-1>=0&&PositionX+1<GameHandler.State._Room.Width&&GameHandler.State._Room.Layout[PositionX+1,PositionY-1].cellType.IsEnterable)
                             {
                             if(!GameHandler.State._Room.Layout[PositionX+1,PositionY-1].IsOccupied)
                                 {
@@ -120,7 +123,7 @@ namespace UGCli
                         }
                 case 3:
                         {
-                        if(PositionX+1<GameHandler.State._Room.Widht&&GameHandler.State._Room.Layout[PositionX+1,PositionY].cellType.IsEnterable)
+                        if(PositionX+1<GameHandler.State._Room.Width&&GameHandler.State._Room.Layout[PositionX+1,PositionY].cellType.IsEnterable)
                             {
                             if(!GameHandler.State._Room.Layout[PositionX+1,PositionY].IsOccupied)
                                 {
@@ -136,7 +139,7 @@ namespace UGCli
                         }
                 case 4:
                         {
-                        if(PositionX+1<GameHandler.State._Room.Widht&&PositionY+1<GameHandler.State._Room.Height&&GameHandler.State._Room.Layout[PositionX+1,PositionY+1].cellType.IsEnterable)
+                        if(PositionX+1<GameHandler.State._Room.Width&&PositionY+1<GameHandler.State._Room.Height&&GameHandler.State._Room.Layout[PositionX+1,PositionY+1].cellType.IsEnterable)
                             {
                             if(!GameHandler.State._Room.Layout[PositionX+1,PositionY+1].IsOccupied)
                                 {

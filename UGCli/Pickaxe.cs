@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace UGCli
-    {
+    {/// <summary>
+    /// special weapon of teh player character, can be upgraded (not implemented )
+    /// </summary>
     public class Pickaxe:Weapon
         {
         protected double _UntillScalingUpgrade;
@@ -13,7 +15,7 @@ namespace UGCli
         protected int _UntilSpeedUpgrade;
 
 
-        public Pickaxe(Hero p):base(p)
+        public Pickaxe():base()
             {
             ItemID+=1000;
             Name="Pickaxe";
